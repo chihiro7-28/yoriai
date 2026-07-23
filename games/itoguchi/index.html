@@ -36,20 +36,22 @@ html,body{width:100%;height:100%;background:#fdf6ea;overflow:hidden;}
 body{display:flex;align-items:center;justify-content:center;}
 
 .app{
-  position:relative;width:100vw;height:100vh;overflow:hidden;
+  position:relative;width:100vw;height:100vh;max-width:480px;overflow:hidden;
   background:
     radial-gradient(circle at 1px 1px, rgba(36,31,24,0.05) 1px, transparent 0) 0 0/22px 22px,
     var(--ink);
   color:var(--paper);
   font-family:'IBM Plex Mono',monospace;
 }
-@media (pointer:fine){ .app{ max-width:calc(100vh * 0.5); } }
+/* iPhone/iPadの横持ち・iPadの縦持ちなど、幅が広い画面では
+   スマホと同じ比率のカードとして中央に表示する(タッチ・マウス問わず) */
 
 .screen{
   position:absolute;inset:0;display:flex;flex-direction:column;
   opacity:0;pointer-events:none;transform:translateY(8px);
   transition:opacity 0.35s ease,transform 0.35s ease;
   z-index:1;
+  overflow-y:auto; /* 横持ちなど縦幅が足りない端末でも、見切れず縦スクロールできるように */
 }
 .screen.active{opacity:1;pointer-events:auto;transform:translateY(0);z-index:2;}
 
