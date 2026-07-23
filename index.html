@@ -44,7 +44,8 @@ body{display:flex;justify-content:center;}
   font-family:'IBM Plex Mono',monospace;
   display:flex;flex-direction:column;
 }
-@media (min-width:640px){ .app{ max-width:520px; } }
+@media (min-width:640px){ .app{ max-width:640px; } }
+@media (min-width:1024px){ .app{ max-width:880px; } }
 
 .serif{font-family:'Shippori Mincho',serif;}
 
@@ -68,6 +69,12 @@ body{display:flex;justify-content:center;}
 
 /* ゲーム一覧 */
 .list{flex:1;padding:6px 22px 30px;display:flex;flex-direction:column;gap:14px;}
+@media (min-width:640px){
+  .list{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start;}
+  .section-title{grid-column:1 / -1;}
+  .hero-title{font-size:56px;}
+  .hero-lead{font-size:14px;}
+}
 .section-title{
   font-size:10px;letter-spacing:3px;color:var(--gold);margin:14px 2px 2px;
   display:flex;align-items:center;gap:8px;

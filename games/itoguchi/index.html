@@ -43,8 +43,20 @@ body{display:flex;align-items:center;justify-content:center;}
   color:var(--paper);
   font-family:'IBM Plex Mono',monospace;
 }
-/* iPhone/iPadの横持ち・iPadの縦持ちなど、幅が広い画面では
-   スマホと同じ比率のカードとして中央に表示する(タッチ・マウス問わず) */
+/* タブレットや横持ちなど画面が広い時は、間延びさせず、かつ持て余しすぎないよう
+   段階的に横幅を広げる(見やすさ優先。スマホはそのまま100vw) */
+@media (min-width:640px){ .app{ max-width:640px; } }
+@media (min-width:1024px){ .app{ max-width:760px; } }
+
+/* 画面が広がった分、主要な見出し・数字も一段階大きく表示する */
+@media (min-width:640px){
+  .handoff-name{font-size:clamp(38px,6.5vw,54px) !important;}
+  .card-number{font-size:clamp(58px,13vw,88px) !important;}
+  .card-word{font-size:clamp(32px,7vw,46px) !important;}
+  .discuss-theme{font-size:clamp(32px,6vw,44px) !important;}
+  .result-verdict{font-size:clamp(34px,6.5vw,48px) !important;}
+  .title-main{font-size:clamp(80px,15vw,120px) !important;}
+}
 
 .screen{
   position:absolute;inset:0;display:flex;flex-direction:column;
