@@ -42,10 +42,10 @@ body{display:flex;justify-content:center;}
     var(--ink);
   color:var(--paper);
   font-family:'IBM Plex Mono',monospace;
-  display:flex;flex-direction:column;
+  display:flex;flex-direction:column;justify-content:center;
 }
 @media (min-width:640px){ .app{ max-width:620px; } }
-@media (min-width:1024px){ .app{ max-width:700px; } }
+@media (min-width:1024px){ .app{ max-width:760px; } }
 
 .serif{font-family:'Shippori Mincho',serif;}
 
@@ -70,23 +70,27 @@ body{display:flex;justify-content:center;}
 /* ゲーム一覧 */
 .list{padding:6px 22px 30px;display:flex;flex-direction:column;gap:14px;}
 @media (min-width:640px){
-  .hero-title{font-size:64px;}
-  .hero-lead{font-size:15px;line-height:2.1;}
-  .game-card{padding:24px 28px;}
-  .game-title{font-size:30px;}
-  .game-desc{font-size:15px;}
-  .game-file-no{font-size:11px;}
-  .game-status{font-size:11px;}
-  .game-tag{font-size:12px;padding:6px 12px;}
-  .section-title{font-size:12px;}
-  .footer{font-size:13px;}
+  .hero-badge-dot{width:26px;height:26px;}
+  .hero{padding-top:calc(env(safe-area-inset-top,0px) + 60px);padding-bottom:40px;}
+  .hero-title{font-size:80px;}
+  .hero-lead{font-size:17px;line-height:2.2;}
+  .list{gap:20px;}
+  .game-card{padding:32px 36px;}
+  .game-title{font-size:36px;margin-bottom:10px;}
+  .game-desc{font-size:17px;line-height:1.8;margin-bottom:14px;}
+  .game-file-no{font-size:13px;}
+  .game-status{font-size:13px;}
+  .game-tag{font-size:14px;padding:7px 14px;}
+  .section-title{font-size:13px;margin-top:20px;}
+  .footer{font-size:14px;}
 }
 @media (min-width:1024px){
-  .hero-title{font-size:76px;}
-  .hero-lead{font-size:16px;}
-  .game-card{padding:30px 34px;}
-  .game-title{font-size:36px;}
-  .game-desc{font-size:16px;}
+  .hero-title{font-size:92px;}
+  .hero-lead{font-size:18px;}
+  .game-card{padding:38px 42px;}
+  .game-title{font-size:42px;}
+  .game-desc{font-size:18px;}
+  .game-tag{font-size:15px;padding:8px 16px;}
 }
 .section-title{
   font-size:10px;letter-spacing:3px;color:var(--gold);margin:14px 2px 2px;
