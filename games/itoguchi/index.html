@@ -400,6 +400,13 @@ body{display:flex;align-items:center;justify-content:center;}
 }
 .check-name-btn:active{background:rgba(168,118,31,0.12);border-color:var(--gold-dim);}
 
+.check-number-panel{
+  width:100%;max-width:260px;padding:32px 20px;
+  background:var(--paper);border:2px solid var(--gold);
+  display:flex;align-items:center;justify-content:center;
+}
+.check-number-panel .card-number{color:var(--ink);}
+
 @keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
 .fade{animation:fadeUp 0.4s ease forwards;}
 
@@ -581,7 +588,9 @@ body{display:flex;align-items:center;justify-content:center;}
 
     <div class="check-step" id="checkStepReveal">
       <div class="handoff-eyebrow">YOUR NUMBER</div>
-      <div class="card-number" id="checkRevealNumber" style="color:var(--paper);">--</div>
+      <div class="check-number-panel">
+        <div class="card-number" id="checkRevealNumber">--</div>
+      </div>
       <div class="handoff-msg">確認したら、他の人に見られないように<br>すぐ閉じてください</div>
       <button class="btn btn-primary" id="checkCloseBtn" style="max-width:240px;">閉じる</button>
     </div>
