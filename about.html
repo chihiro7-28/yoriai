@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#fdf6ea">
+<title>よりあいについて — サイト運営情報・更新履歴</title>
+<meta name="description" content="「よりあい」はスマホ1台で遊べるパーティーゲーム集です。サービス概要、運営者情報、お問い合わせ先、更新履歴をまとめています。">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=IBM+Plex+Mono:wght@400;500;600;700&family=M+PLUS+Rounded+1c:wght@700;800&display=swap');
+
+:root{
+  --ink:#fdf6ea;--ink-2:#fffaf0;--ink-3:#f7ecd6;
+  --paper:#241f18;--paper-dim:#5a5041;--paper-line:rgba(36,31,24,0.14);
+  --gold:#a8761f;--gold-dim:rgba(168,118,31,0.35);
+  --stamp:#d6432c;--stamp-dim:rgba(214,67,44,0.35);
+  --good:#2f8f5b;
+  --muted:rgba(36,31,24,0.6);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{width:100%;min-height:100%;background:var(--ink);}
+body{display:flex;justify-content:center;color:var(--paper);font-family:'IBM Plex Mono',monospace;}
+.app{width:100%;max-width:720px;padding-bottom:60px;}
+.serif{font-family:'Shippori Mincho',serif;}
+a{color:var(--gold);}
+
+/* ヘッダー */
+.hero{padding:calc(env(safe-area-inset-top,0px) + 34px) 26px 32px;text-align:center;border-bottom:1px solid var(--gold-dim);}
+.back-link{display:inline-block;margin-bottom:22px;font-size:12px;color:var(--muted);text-decoration:underline;}
+.hero-badge{display:flex;gap:8px;justify-content:center;margin-bottom:16px;}
+.hero-badge-dot{width:16px;height:16px;border-radius:50%;}
+.hero-badge-dot.d1{background:linear-gradient(160deg,#ff8a65,#ff5f6d);}
+.hero-badge-dot.d2{background:linear-gradient(160deg,#ffd166,#ff9f5f);}
+.hero-badge-dot.d3{background:linear-gradient(160deg,#8fd3c8,#5fb6ff);}
+.hero h1{font-family:'M PLUS Rounded 1c',sans-serif;font-weight:800;font-size:clamp(30px,8vw,40px);letter-spacing:1px;margin-bottom:6px;}
+.hero-caption{font-size:10px;letter-spacing:4px;color:var(--muted);margin-bottom:16px;}
+.hero-lead{font-size:14px;line-height:1.9;color:var(--paper-dim);max-width:460px;margin:0 auto;}
+
+/* セクション共通 */
+section{padding:40px 26px;border-bottom:1px solid var(--paper-line);}
+section:last-of-type{border-bottom:none;}
+.section-eyebrow{font-size:10px;letter-spacing:4px;color:var(--gold);margin-bottom:10px;}
+.section-title{font-family:'Shippori Mincho',serif;font-size:24px;font-weight:700;margin-bottom:18px;}
+.section-body p{font-size:14px;line-height:1.95;color:var(--paper-dim);margin-bottom:14px;}
+.section-body p:last-child{margin-bottom:0;}
+
+/* サービス概要: 特徴カード */
+.feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px;}
+.feature-card{background:var(--ink-2);border:1px solid var(--paper-line);padding:16px;}
+.feature-card .num{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:2px;margin-bottom:8px;}
+.feature-card h3{font-family:'Shippori Mincho',serif;font-size:15px;margin-bottom:6px;}
+.feature-card p{font-size:12px;line-height:1.7;color:var(--muted);}
+
+/* 運営者情報テーブル */
+.info-table{width:100%;border-collapse:collapse;margin-top:8px;}
+.info-table tr{border-bottom:1px solid var(--paper-line);}
+.info-table tr:last-child{border-bottom:none;}
+.info-table th{
+  text-align:left;font-weight:600;font-size:11px;letter-spacing:1px;color:var(--gold);
+  padding:14px 16px 14px 0;width:120px;vertical-align:top;white-space:nowrap;
+}
+.info-table td{padding:14px 0;font-size:13.5px;line-height:1.8;color:var(--paper-dim);}
+
+/* お問い合わせ・サポート */
+.support-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px;}
+.support-btn{
+  flex:1;min-width:180px;text-align:center;text-decoration:none;
+  background:var(--ink-2);border:1px solid var(--gold-dim);color:var(--paper);
+  font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;
+  padding:15px 14px;
+}
+.support-btn:active{background:rgba(168,118,31,0.12);}
+
+/* 更新履歴タイムライン */
+.timeline{position:relative;margin-top:24px;padding-left:26px;}
+.timeline::before{content:'';position:absolute;left:5px;top:6px;bottom:6px;width:1px;background:var(--paper-line);}
+.timeline-item{position:relative;padding-bottom:26px;}
+.timeline-item:last-child{padding-bottom:0;}
+.timeline-item::before{
+  content:'';position:absolute;left:-26px;top:4px;width:11px;height:11px;border-radius:50%;
+  background:var(--ink);border:2px solid var(--gold);
+}
+.timeline-date{font-size:10.5px;letter-spacing:1.5px;color:var(--gold);margin-bottom:5px;}
+.timeline-title{font-family:'Shippori Mincho',serif;font-size:15.5px;font-weight:700;margin-bottom:4px;}
+.timeline-desc{font-size:12.5px;line-height:1.8;color:var(--muted);}
+.timeline-tag{
+  display:inline-block;font-size:9.5px;letter-spacing:1px;padding:2px 8px;margin-left:8px;
+  border:1px solid var(--gold-dim);color:var(--gold);vertical-align:middle;
+}
+.timeline-tag.new{border-color:var(--stamp-dim);color:var(--stamp);}
+
+/* ゲーム一覧ミニカード */
+.game-links{display:flex;flex-direction:column;gap:10px;margin-top:20px;}
+.game-link-card{
+  display:flex;justify-content:space-between;align-items:center;
+  text-decoration:none;color:var(--paper);
+  background:var(--ink-2);border:1px solid var(--paper-line);border-left:3px solid var(--stamp);
+  padding:14px 18px;
+}
+.game-link-card .name{font-family:'Shippori Mincho',serif;font-size:16px;font-weight:700;}
+.game-link-card .arrow{color:var(--gold);font-size:14px;}
+
+.footer{padding:30px 26px calc(env(safe-area-inset-bottom,0px) + 30px);text-align:center;font-size:11px;color:var(--muted);line-height:1.9;}
+
+@media (min-width:640px){
+  .hero h1{font-size:44px;}
+  .section-title{font-size:28px;}
+}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <div class="hero">
+    <a class="back-link" href="./">← よりあい トップへ</a>
+    <div class="hero-badge">
+      <div class="hero-badge-dot d1"></div>
+      <div class="hero-badge-dot d2"></div>
+      <div class="hero-badge-dot d3"></div>
+    </div>
+    <h1>よりあいについて</h1>
+    <div class="hero-caption">ABOUT YORIAI</div>
+    <p class="hero-lead">
+      スマホ1台を回して遊ぶ、無料のパーティーゲーム集「よりあい」の
+      サービス概要・運営情報・更新履歴をまとめたページです。
+    </p>
+  </div>
+
+  <section>
+    <div class="section-eyebrow">SERVICE</div>
+    <div class="section-title">サービス概要</div>
+    <div class="section-body">
+      <p>
+        「よりあい」は、スマートフォン1台を持ち回りながら、その場にいる3人以上で遊べるパーティーゲームを集めたWebサービスです。
+        アプリのダウンロードやアカウント登録は一切不要で、URLを開けばその場ですぐに遊び始められます。
+      </p>
+      <p>
+        飲み会や女子会、家族の集まり、旅行の移動時間、授業や研修のアイスブレイクなど、
+        「スマホは持っているけれど専用の道具は無い」という状況でも成立するように設計しています。
+        現在は数字を使った協力型の推理ゲーム「糸口」と、会話から少数派を見つけ出す正体隠匿ゲーム「一匹狼」の2タイトルを公開しており、
+        今後も新しいゲームを追加していく予定です。
+      </p>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="num">01</div>
+        <h3>インストール不要</h3>
+        <p>ブラウザで開くだけ。アプリストアを経由しないので、その場で全員がすぐに参加できます。</p>
+      </div>
+      <div class="feature-card">
+        <div class="num">02</div>
+        <h3>完全無料</h3>
+        <p>全ての機能を無料で利用できます。広告収益と任意の投げ銭のみで運営しています。</p>
+      </div>
+      <div class="feature-card">
+        <div class="num">03</div>
+        <h3>データは端末内のみ</h3>
+        <p>入力した名前やお題はブラウザ内(localStorage)にのみ保存され、サーバーには送信されません。</p>
+      </div>
+      <div class="feature-card">
+        <div class="num">04</div>
+        <h3>継続的にアップデート</h3>
+        <p>いただいたご意見をもとに、お題の追加や新機能を継続的に反映しています。</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-eyebrow">OPERATOR</div>
+    <div class="section-title">運営者情報</div>
+    <table class="info-table">
+      <tr><th>サービス名</th><td>よりあい(YORIAI)</td></tr>
+      <tr><th>運営形態</th><td>個人開発(個人運営)</td></tr>
+      <tr><th>提供内容</th><td>ブラウザ上で動作するパーティーゲームの企画・開発・運営</td></tr>
+      <tr><th>運営開始</th><td>2026年7月</td></tr>
+      <tr><th>所在地</th><td>日本</td></tr>
+      <tr><th>お問い合わせ</th><td>下記「サポート・お問い合わせ」の窓口よりご連絡ください</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <div class="section-eyebrow">SUPPORT</div>
+    <div class="section-title">サポート・お問い合わせ</div>
+    <div class="section-body">
+      <p>不具合報告、お題のリクエスト、新機能のご提案など、お気軽にお寄せください。いただいた内容は今後のアップデートの参考にさせていただきます。</p>
+    </div>
+    <div class="support-row">
+      <a class="support-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSebgat28T74hz3bpebuBTNdrhPGcKun_NDHX9PPi0NkBlTbkg/viewform" target="_blank" rel="noopener">💬 ご意見・ご要望を送る</a>
+      <a class="support-btn" href="privacy.html">📄 プライバシーポリシー</a>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-eyebrow">CHANGELOG</div>
+    <div class="section-title">更新履歴</div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-date">2026.07.27</div>
+        <div class="timeline-title">サイトについてページを公開<span class="timeline-tag new">NEW</span></div>
+        <div class="timeline-desc">運営者情報・お問い合わせ・更新履歴をまとめたページを追加しました。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2026.07.26</div>
+        <div class="timeline-title">サポート機能を追加</div>
+        <div class="timeline-desc">フィードバックフォームを設置。ご意見・バグ報告を受け付けられるようにしました。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2026.07.25</div>
+        <div class="timeline-title">英語表示に対応</div>
+        <div class="timeline-desc">ホーム画面に言語切り替えボタンを追加し、英語表示を選べるようにしました。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2026.07.24</div>
+        <div class="timeline-title">起動アニメーションを追加</div>
+        <div class="timeline-desc">各ページを開いた際に、ブランドロゴが表示される演出を追加しました。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2026.07.23</div>
+        <div class="timeline-title">「一匹狼」お題を大幅増量</div>
+        <div class="timeline-desc">お題ペアを42件から212件に拡充。カテゴリ・難易度別のバランスも調整しました。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2026.07.22</div>
+        <div class="timeline-title">投票方式・人狼人数を選択可能に</div>
+        <div class="timeline-desc">「一匹狼」に、投票方式(個別/せーの)と人狼の人数を自由に設定できる機能を追加しました。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2026.07.20</div>
+        <div class="timeline-title">レスポンシブ対応</div>
+        <div class="timeline-desc">タブレットや画面の向きに応じて、レイアウトと文字サイズが最適化されるようにしました。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2026.07.18</div>
+        <div class="timeline-title">「一匹狼」を公開</div>
+        <div class="timeline-desc">2本目のゲームとして、正体隠匿ゲーム「一匹狼」を追加しました。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2026.07.15</div>
+        <div class="timeline-title">結果シェア機能を追加</div>
+        <div class="timeline-desc">「糸口」の結果画面から、プレイ結果を画像として保存・共有できるようにしました。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2026.07.10</div>
+        <div class="timeline-title">「よりあい」を公開</div>
+        <div class="timeline-desc">複数のパーティーゲームを収録するホームページとして「よりあい」を公開しました。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2026.07.05</div>
+        <div class="timeline-title">「糸口」を公開</div>
+        <div class="timeline-desc">1本目のゲームとして、協力ならべゲーム「糸口」を公開しました。</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-eyebrow">GAMES</div>
+    <div class="section-title">遊べるゲーム</div>
+    <div class="game-links">
+      <a class="game-link-card" href="games/itoguchi/">
+        <span class="name">糸口</span>
+        <span class="arrow">遊びに行く →</span>
+      </a>
+      <a class="game-link-card" href="games/ippikiokami/">
+        <span class="name">一匹狼</span>
+        <span class="arrow">遊びに行く →</span>
+      </a>
+    </div>
+  </section>
+
+  <div class="footer">
+    「よりあい」は個人開発のパーティーゲーム集です。特定の企業・商品とは関係ありません。<br>
+    © 2026 Yoriai
+  </div>
+
+</div>
+</body>
+</html>

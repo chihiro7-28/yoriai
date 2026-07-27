@@ -103,6 +103,33 @@ body{display:flex;align-items:center;justify-content:center;}
 
 .serif{font-family:'Shippori Mincho',serif;}
 
+/* ===== 起動アニメーション ===== */
+.splash{
+  position:fixed;inset:0;z-index:200;
+  background:var(--ink);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;
+  transition:opacity 0.5s ease;
+}
+.splash.hide{opacity:0;pointer-events:none;}
+.splash-badge{display:flex;gap:10px;}
+.splash-dot{width:20px;height:20px;border-radius:50%;animation:dotBob 1.1s ease-in-out infinite;}
+.splash-dot.d1{background:linear-gradient(160deg,#ff8a65,#ff5f6d);animation-delay:0s;}
+.splash-dot.d2{background:linear-gradient(160deg,#ffd166,#ff9f5f);animation-delay:0.15s;}
+.splash-dot.d3{background:linear-gradient(160deg,#8fd3c8,#5fb6ff);animation-delay:0.3s;}
+.splash-title{
+  font-family:'M PLUS Rounded 1c',sans-serif;font-weight:800;font-size:38px;letter-spacing:1px;
+  background:linear-gradient(135deg,#ff8a65,#ffd166,#5fb6ff);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  opacity:0;animation:splashFadeUp 0.6s ease forwards 0.15s;
+}
+.splash-caption{
+  font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:4px;color:var(--muted);
+  opacity:0;animation:splashFadeUp 0.6s ease forwards 0.3s;
+  display:none;
+}
+html.lang-en .splash-caption{display:block;}
+@keyframes splashFadeUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+
 /* ===== 共通ヘッダー ===== */
 .file-header{
   padding:calc(env(safe-area-inset-top,0px) + 18px) 22px 14px;
@@ -509,6 +536,15 @@ body{display:flex;align-items:center;justify-content:center;}
 <link rel="manifest" href="manifest.json">
 </head>
 <body>
+<div class="splash" id="splash">
+  <div class="splash-badge">
+    <div class="splash-dot d1"></div>
+    <div class="splash-dot d2"></div>
+    <div class="splash-dot d3"></div>
+  </div>
+  <div class="splash-title">一匹狼</div>
+  <div class="splash-caption">Ippikiokami</div>
+</div>
 <div class="app">
 
 <!-- ===== スタート画面 ===== -->
@@ -711,6 +747,15 @@ body{display:flex;align-items:center;justify-content:center;}
    お題を明かさずに会話し、誰が少数派(一匹狼)かを投票で見つけ出す。
    バックエンド無し・完全ローカル動作。
    ========================================================================== */
+
+// ホーム画面などで選ばれた言語設定を読み取って反映する(本格対応は後続で追加)
+(function () {
+  try {
+    if (localStorage.getItem('yoriai_lang') === 'en') {
+      document.documentElement.classList.add('lang-en');
+    }
+  } catch (e) {}
+})();
 
 const MIN_PLAYERS = 3;
 const PLAYERS_KEY = 'ippikiokami_players';
@@ -2028,5 +2073,16 @@ renderVoteModeTabs();
 renderTimerLengthTabs();
 renderCustomPairList();
 updateStartBtn();
+
+// 起動アニメーション: 短く見せてからフェードアウトして消す
+window.addEventListener('load', function () {
+  setTimeout(function () {
+    var splash = document.getElementById('splash');
+    if (!splash) return;
+    splash.classList.add('hide');
+    setTimeout(function () { splash.remove(); }, 1100);
+  }, 1300);
+});
 </script>
+</body>
 </html>
