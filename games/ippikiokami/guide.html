@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#fdf6ea">
+<title>一匹狼の遊び方・ルール完全ガイド — よりあい</title>
+<meta name="description" content="正体隠匿ゲーム「一匹狼」の遊び方を、準備から結果発表まで丁寧に解説。投票方式の違いやコツ、よくある質問もまとめています。スマホ1台、3人から遊べます。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://chihiro7-28.github.io/yoriai/games/ippikiokami/guide.html">
+<meta property="og:title" content="一匹狼の遊び方・ルール完全ガイド — よりあい">
+<meta property="og:description" content="正体隠匿ゲーム「一匹狼」の遊び方を、準備から結果発表まで丁寧に解説。投票方式の違いやコツ、よくある質問もまとめています。スマホ1台、3人から遊べます。">
+<meta property="og:image" content="https://chihiro7-28.github.io/yoriai/games/ippikiokami/ogp-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="一匹狼の遊び方・ルール完全ガイド — よりあい">
+<meta name="twitter:description" content="正体隠匿ゲーム「一匹狼」の遊び方を、準備から結果発表まで丁寧に解説。投票方式の違いやコツ、よくある質問もまとめています。スマホ1台、3人から遊べます。">
+<meta name="twitter:image" content="https://chihiro7-28.github.io/yoriai/games/ippikiokami/ogp-image.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=IBM+Plex+Mono:wght@400;500;600;700&family=M+PLUS+Rounded+1c:wght@700;800&display=swap');
+
+:root{
+  --ink:#fdf6ea;--ink-2:#fffaf0;--ink-3:#f7ecd6;
+  --paper:#241f18;--paper-dim:#5a5041;--paper-line:rgba(36,31,24,0.14);
+  --gold:#a8761f;--gold-dim:rgba(168,118,31,0.35);
+  --sky:#2477a8;--sky-dim:rgba(36,119,168,0.35);
+  --muted:rgba(36,31,24,0.6);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{width:100%;min-height:100%;background:var(--ink);}
+body{display:flex;justify-content:center;color:var(--paper);font-family:'IBM Plex Mono',monospace;}
+.app{width:100%;max-width:720px;padding-bottom:60px;}
+.serif{font-family:'Shippori Mincho',serif;}
+a{color:var(--gold);}
+
+.hero{padding:calc(env(safe-area-inset-top,0px) + 34px) 26px 30px;text-align:center;border-bottom:1px solid var(--gold-dim);position:relative;}
+.lang-toggle{
+  position:absolute;top:calc(env(safe-area-inset-top,0px) + 18px);right:22px;
+  background:var(--ink-2);border:1px solid var(--sky-dim);color:var(--sky);
+  font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700;letter-spacing:1px;
+  padding:8px 14px;cursor:pointer;
+}
+.lang-toggle:active{background:rgba(36,119,168,0.12);}
+.back-link{display:inline-block;margin-bottom:20px;font-size:12px;color:var(--muted);text-decoration:underline;}
+.hero-eyebrow{font-size:10px;letter-spacing:4px;color:var(--sky);margin-bottom:10px;}
+.hero h1{font-family:'Shippori Mincho',serif;font-size:clamp(28px,7vw,38px);font-weight:700;margin-bottom:10px;}
+.hero-lead{font-size:13.5px;line-height:1.9;color:var(--paper-dim);max-width:480px;margin:0 auto 20px;}
+.hero-meta{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;}
+.hero-tag{font-size:10.5px;letter-spacing:1px;padding:5px 11px;border:1px solid var(--sky-dim);color:var(--sky);}
+.play-btn{
+  display:inline-block;margin-top:20px;text-decoration:none;
+  background:var(--sky);color:var(--ink);font-family:'IBM Plex Mono',monospace;
+  font-size:13px;font-weight:700;letter-spacing:1px;padding:14px 30px;
+}
+
+section{padding:38px 26px;border-bottom:1px solid var(--paper-line);}
+section:last-of-type{border-bottom:none;}
+.section-eyebrow{font-size:10px;letter-spacing:4px;color:var(--sky);margin-bottom:10px;}
+.section-title{font-family:'Shippori Mincho',serif;font-size:23px;font-weight:700;margin-bottom:18px;}
+.section-body p{font-size:14px;line-height:1.95;color:var(--paper-dim);margin-bottom:14px;}
+.section-body p:last-child{margin-bottom:0;}
+
+.steps{counter-reset:step;margin-top:8px;}
+.step{position:relative;padding:0 0 26px 44px;}
+.step:last-child{padding-bottom:0;}
+.step::before{
+  counter-increment:step;content:counter(step);
+  position:absolute;left:0;top:0;width:30px;height:30px;
+  background:var(--sky);color:var(--ink);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:14px;
+}
+.step h3{font-family:'Shippori Mincho',serif;font-size:16.5px;margin-bottom:6px;}
+.step p{font-size:13.5px;line-height:1.85;color:var(--paper-dim);}
+
+.example-card{
+  background:var(--ink-2);border:1px solid var(--paper-line);border-left:3px solid var(--sky);
+  padding:16px 18px;margin-top:16px;font-size:13px;line-height:1.9;color:var(--paper-dim);
+}
+.example-card b{color:var(--paper);}
+
+/* 投票方式の比較 */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px;}
+.compare-card{background:var(--ink-2);border:1px solid var(--paper-line);padding:16px;}
+.compare-card h3{font-family:'Shippori Mincho',serif;font-size:15px;margin-bottom:8px;color:var(--sky);}
+.compare-card ul{padding-left:16px;}
+.compare-card li{font-size:12px;line-height:1.8;color:var(--paper-dim);margin-bottom:4px;}
+
+.tip-list{display:flex;flex-direction:column;gap:14px;margin-top:8px;}
+.tip{background:var(--ink-2);border:1px solid var(--paper-line);padding:16px 18px;}
+.tip h3{font-family:'Shippori Mincho',serif;font-size:15px;margin-bottom:6px;color:var(--sky);}
+.tip p{font-size:13px;line-height:1.85;color:var(--paper-dim);}
+
+.faq{margin-top:8px;}
+.faq-item{border-bottom:1px solid var(--paper-line);padding:18px 0;}
+.faq-item:first-child{padding-top:0;}
+.faq-item:last-child{border-bottom:none;padding-bottom:0;}
+.faq-q{font-family:'Shippori Mincho',serif;font-size:15px;font-weight:700;margin-bottom:8px;display:flex;gap:8px;}
+.faq-q span{color:var(--sky);flex-shrink:0;}
+.faq-a{font-size:13px;line-height:1.85;color:var(--paper-dim);padding-left:22px;}
+
+.cta{padding:44px 26px;text-align:center;}
+.cta .section-title{margin-bottom:10px;}
+.cta p{font-size:13px;color:var(--muted);margin-bottom:20px;}
+
+.footer{padding:30px 26px calc(env(safe-area-inset-bottom,0px) + 30px);text-align:center;font-size:11px;color:var(--muted);line-height:1.9;}
+
+@media (min-width:640px){
+  .hero h1{font-size:44px;}
+  .section-title{font-size:27px;}
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "一匹狼の遊び方",
+  "description": "多数派には同じお題、少数派だけ少し違うお題が配られる正体隠匿ゲーム「一匹狼」の遊び方。",
+  "totalTime": "PT10M",
+  "step": [
+    { "@type": "HowToStep", "name": "参加者を追加し、設定を決める", "text": "3人以上の名前を入力し、カテゴリ・難易度・一匹狼の人数・投票方式・討議時間を設定します。" },
+    { "@type": "HowToStep", "name": "お題を確認する", "text": "スマホを1人ずつ回し、他の人に見られないよう画面を隠しながら、自分に配られたお題をタップして確認します。" },
+    { "@type": "HowToStep", "name": "お題を明かさずに話し合う", "text": "お題そのものは言わずに、その特徴について自由に会話します。" },
+    { "@type": "HowToStep", "name": "投票する", "text": "設定した投票方式に従って、誰が一匹狼だと思うかを決めます。" },
+    { "@type": "HowToStep", "name": "結果発表", "text": "投票結果と実際の一匹狼が公開されます。正しく言い当てられれば市民側の勝利です。" }
+  ]
+}
+</script>
+</head>
+<body>
+<div class="app">
+
+  <div class="hero">
+    <button class="lang-toggle" id="langToggle" type="button">EN</button>
+    <a class="back-link" href="./" data-i18n="backToGame">← 一匹狼 トップへ</a>
+    <div class="hero-eyebrow">HOW TO PLAY</div>
+    <h1 data-i18n="pageTitle">一匹狼の遊び方</h1>
+    <p class="hero-lead" data-i18n="heroLead">
+      多数派には同じお題、少数派だけ少し違うお題が配られる正体隠匿ゲーム「一匹狼」。
+      準備から結果発表まで、初めての人にも分かるように順番に解説します。
+    </p>
+    <div class="hero-meta">
+      <span class="hero-tag" data-i18n="tag3players">3人〜</span>
+      <span class="hero-tag" data-i18n="tagHidden">正体隠匿</span>
+      <span class="hero-tag" data-i18n="tag10min">約10分</span>
+      <span class="hero-tag" data-i18n="tagOnePhone">スマホ1台</span>
+    </div>
+    <a class="play-btn" href="./" data-i18n="playNow">今すぐ遊ぶ →</a>
+  </div>
+
+  <section>
+    <div class="section-eyebrow">CONCEPT</div>
+    <div class="section-title" data-i18n="conceptTitle">一匹狼とはどんなゲーム？</div>
+    <div class="section-body">
+      <p data-i18n="conceptP1">
+        参加者のほとんど(多数派)には同じお題が、そして1人以上(少数派＝一匹狼)には、少しだけ違うお題がこっそり配られます。
+        誰がどちらのお題を持っているかは、自分以外分かりません。
+      </p>
+      <p data-i18n="conceptP2">
+        全員がお題を明かさずに、それについて自由に会話をします。多数派は自然に話が噛み合う一方、
+        一匹狼は少し違うお題を持っているため、会話の中でどこかチグハグな違和感が生まれます。
+        その違和感を手がかりに、会話の中から一匹狼を見つけ出すのがこのゲームの目的です。
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-eyebrow">RULES</div>
+    <div class="section-title" data-i18n="rulesTitle">基本ルール</div>
+    <div class="steps">
+      <div class="step">
+        <h3 data-i18n="step1Title">参加者を追加し、設定を決める</h3>
+        <p data-i18n="step1Body">3人以上の名前を入力し、カテゴリ・難易度・一匹狼の人数・投票方式・討議時間を設定します。迷ったら「おまかせ」のままで大丈夫です。</p>
+      </div>
+      <div class="step">
+        <h3 data-i18n="step2Title">お題を確認する(受け渡し)</h3>
+        <p data-i18n="step2Body">スマホを1人ずつ回し、他の人に見られないよう画面を隠しながら、自分に配られたお題(単語)をタップして確認します。</p>
+      </div>
+      <div class="step">
+        <h3 data-i18n="step3Title">お題を明かさずに話し合う</h3>
+        <p data-i18n="step3Body">画面に表示される「話すきっかけ」の質問なども参考にしながら、お題そのものは言わずに、その特徴について自由に会話します。制限時間はタイマーで管理できます。</p>
+      </div>
+      <div class="step">
+        <h3 data-i18n="step4Title">投票する</h3>
+        <p data-i18n="step4Body">設定した投票方式(下記で解説)に従って、誰が一匹狼だと思うかを決めます。</p>
+      </div>
+      <div class="step">
+        <h3 data-i18n="step5Title">結果発表</h3>
+        <p data-i18n="step5Body">投票結果と実際の一匹狼が公開されます。正しく言い当てられれば市民側の勝利、取り逃がすと一匹狼側の勝利です。</p>
+      </div>
+    </div>
+    <div class="example-card" data-i18n="exampleCard">
+      <b>お題「うどん」(多数派) / 「そば」(一匹狼)の会話例</b><br>
+      Aさん「これ、つゆが決め手だよね」<br>
+      Bさん「わかる、コシも大事だけど」<br>
+      Cさん「私は薬味の香りが一番好きかも」<br>
+      → 「そば」を持つ人だけ少し違う視点の発言をしがちなので、その違和感がヒントになります。
+    </div>
+  </section>
+
+  <section>
+    <div class="section-eyebrow">VOTING</div>
+    <div class="section-title" data-i18n="votingTitle">2つの投票方式</div>
+    <div class="section-body">
+      <p data-i18n="votingBody">討議のあと、誰が一匹狼かを決める方法は2種類から選べます。グループの雰囲気に合わせて使い分けてみてください。</p>
+    </div>
+    <div class="compare">
+      <div class="compare-card">
+        <h3 data-i18n="voteIndividualTitle">1人ずつ投票</h3>
+        <ul>
+          <li data-i18n="voteIndividual1">スマホをパスして、1人ずつ秘密で投票</li>
+          <li data-i18n="voteIndividual2">他の人の投票に影響されない</li>
+          <li data-i18n="voteIndividual3">じっくり考えたい時向き</li>
+        </ul>
+      </div>
+      <div class="compare-card">
+        <h3 data-i18n="voteGroupTitle">せーの方式</h3>
+        <ul>
+          <li data-i18n="voteGroup1">パス不要、全員同時に指差し</li>
+          <li data-i18n="voteGroup2">テンポが良く盛り上がりやすい</li>
+          <li data-i18n="voteGroup3">大人数でも短時間で決着</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-eyebrow">TIPS</div>
+    <div class="section-title" data-i18n="tipsTitle">上手に遊ぶコツ</div>
+    <div class="tip-list">
+      <div class="tip">
+        <h3 data-i18n="tip1Title">多数派は、あえて曖昧に話す</h3>
+        <p data-i18n="tip1Body">具体的すぎる発言は、一匹狼に情報を与えすぎてしまいます。少し抽象的な言い回しから始めると、探り合いが長く楽しめます。</p>
+      </div>
+      <div class="tip">
+        <h3 data-i18n="tip2Title">一匹狼は、周りの話をよく聞いて合わせる</h3>
+        <p data-i18n="tip2Body">いきなり具体的な特徴を言うと、噛み合わなさがバレやすくなります。まずは周りの発言に相槌を打ちながら、方向性を探るのがコツです。</p>
+      </div>
+      <div class="tip">
+        <h3 data-i18n="tip3Title">「話すきっかけ」を活用する</h3>
+        <p data-i18n="tip3Body">討議画面に表示される質問例は、会話が広がりにくい時のヒントになります。困ったらそこから話し始めてみてください。</p>
+      </div>
+      <div class="tip">
+        <h3 data-i18n="tip4Title">人数が多い時は一匹狼を複数人に</h3>
+        <p data-i18n="tip4Body">6人以上集まる場合、一匹狼の人数を2人以上に増やすと、より駆け引きが複雑になり盛り上がります。</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-eyebrow">FAQ</div>
+    <div class="section-title" data-i18n="faqTitle">よくある質問</div>
+    <div class="faq">
+      <div class="faq-item">
+        <div class="faq-q"><span>Q.</span><span data-i18n="faq1Q">一匹狼の人数は自由に決められますか？</span></div>
+        <div class="faq-a" data-i18n="faq1A">A. はい。セットアップ画面の「一匹狼の人数」で、＋／−ボタンから自由に増減できます(参加人数に応じて上限が自動調整されます)。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>Q.</span><span data-i18n="faq2Q">一匹狼が複数人いる時、勝敗はどう決まりますか？</span></div>
+        <div class="faq-a" data-i18n="faq2A">A. 一匹狼を過不足なく全員言い当てられた場合のみ市民側の勝利です。1人でも取り逃がしたり、無関係な人を巻き込んだりすると一匹狼側の勝利になります。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>Q.</span><span data-i18n="faq3Q">お題の難易度はどう違うのですか？</span></div>
+        <div class="faq-a" data-i18n="faq3A">A. 「やさしい」は多数派と一匹狼のお題がはっきり異なるもの、「むずかしい」はジャンルが近く見分けにくいものです。慣れないうちは「やさしい」がおすすめです。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>Q.</span><span data-i18n="faq4Q">自分でお題を追加できますか？</span></div>
+        <div class="faq-a" data-i18n="faq4A">A. できます。ただしネタバレ防止のため、その場で追加したお題ペアは今回のプレイには使われず、次回以降に使えるようになります。</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta">
+    <div class="section-title" data-i18n="ctaTitle">準備はできましたか？</div>
+    <p data-i18n="ctaBody">スマホ1台、3人集まればすぐに始められます。</p>
+    <a class="play-btn" href="./" data-i18n="ctaBtn">一匹狼を遊ぶ →</a>
+  </div>
+
+  <div class="footer">
+    <a href="./" data-i18n="footerHome">一匹狼トップへ</a> ・ <a href="../itoguchi/" data-i18n="footerOther">糸口を見る</a> ・ <a href="../../about.html" data-i18n="footerAbout">よりあいについて</a>
+  </div>
+
+</div>
+<script>
+(function () {
+  var LANG_KEY = 'yoriai_lang';
+  var I18N = {
+    backToGame: { ja: '← 一匹狼 トップへ', en: '← Back to Ippikiokami' },
+    pageTitle: { ja: '一匹狼の遊び方', en: 'How to Play Ippikiokami' },
+    heroLead: {
+      ja: '多数派には同じお題、少数派だけ少し違うお題が配られる正体隠匿ゲーム「一匹狼」。準備から結果発表まで、初めての人にも分かるように順番に解説します。',
+      en: '\u201cIppikiokami (Lone Wolf)\u201d is a hidden-role game where the majority shares one topic and a minority secretly gets a slightly different one. Here\u2019s a step-by-step guide from setup to results, for first-time players.'
+    },
+    tag3players: { ja: '3人〜', en: '3+ players' },
+    tagHidden: { ja: '正体隠匿', en: 'Hidden role' },
+    tag10min: { ja: '約10分', en: '~10 min' },
+    tagOnePhone: { ja: 'スマホ1台', en: 'One phone' },
+    playNow: { ja: '今すぐ遊ぶ →', en: 'Play Now →' },
+    conceptTitle: { ja: '一匹狼とはどんなゲーム？', en: 'What kind of game is Ippikiokami?' },
+    conceptP1: {
+      ja: '参加者のほとんど(多数派)には同じお題が、そして1人以上(少数派＝一匹狼)には、少しだけ違うお題がこっそり配られます。誰がどちらのお題を持っているかは、自分以外分かりません。',
+      en: 'Most players (the majority) are secretly given the same topic, while one or more players (the minority \u2014 the "lone wolf") get a slightly different one. No one but you knows which topic you have.'
+    },
+    conceptP2: {
+      ja: '全員がお題を明かさずに、それについて自由に会話をします。多数派は自然に話が噛み合う一方、一匹狼は少し違うお題を持っているため、会話の中でどこかチグハグな違和感が生まれます。その違和感を手がかりに、会話の中から一匹狼を見つけ出すのがこのゲームの目的です。',
+      en: 'Everyone talks freely about their topic without revealing it. The majority naturally stay in sync, while the lone wolf\u2014holding a slightly different topic\u2014tends to feel a bit out of step in the conversation. The goal is to catch that subtle mismatch and identify the lone wolf.'
+    },
+    rulesTitle: { ja: '基本ルール', en: 'Basic Rules' },
+    step1Title: { ja: '参加者を追加し、設定を決める', en: 'Add players and choose settings' },
+    step1Body: { ja: '3人以上の名前を入力し、カテゴリ・難易度・一匹狼の人数・投票方式・討議時間を設定します。迷ったら「おまかせ」のままで大丈夫です。', en: 'Enter 3 or more names, then set the category, difficulty, number of wolves, voting mode, and discussion time. If unsure, "Random" is a safe default.' },
+    step2Title: { ja: 'お題を確認する(受け渡し)', en: 'Check your topic (pass the phone)' },
+    step2Body: { ja: 'スマホを1人ずつ回し、他の人に見られないよう画面を隠しながら、自分に配られたお題(単語)をタップして確認します。', en: 'Pass the phone around one person at a time. Hide the screen from others while you tap to reveal your assigned topic (word).' },
+    step3Title: { ja: 'お題を明かさずに話し合う', en: 'Discuss without revealing your topic' },
+    step3Body: { ja: '画面に表示される「話すきっかけ」の質問なども参考にしながら、お題そのものは言わずに、その特徴について自由に会話します。制限時間はタイマーで管理できます。', en: 'Talk freely about the characteristics of your topic \u2014 without saying the word itself \u2014 using the on-screen conversation starters if you get stuck. A timer can manage the time limit.' },
+    step4Title: { ja: '投票する', en: 'Vote' },
+    step4Body: { ja: '設定した投票方式(下記で解説)に従って、誰が一匹狼だと思うかを決める。', en: 'Following the voting mode you chose (explained below), decide who you think the lone wolf is.' },
+    step5Title: { ja: '結果発表', en: 'Reveal the results' },
+    step5Body: { ja: '投票結果と実際の一匹狼が公開されます。正しく言い当てられれば市民側の勝利、取り逃がすと一匹狼側の勝利です。', en: 'The vote results and the true lone wolf are revealed. A correct guess means the citizens win; letting the wolf slip away means the wolf wins.' },
+    exampleCard: {
+      ja: '<b>お題「うどん」(多数派) / 「そば」(一匹狼)の会話例</b><br>Aさん「これ、つゆが決め手だよね」<br>Bさん「わかる、コシも大事だけど」<br>Cさん「私は薬味の香りが一番好きかも」<br>→ 「そば」を持つ人だけ少し違う視点の発言をしがちなので、その違和感がヒントになります。',
+      en: '<b>Example conversation for "udon" (majority) / "soba" (lone wolf)</b><br>A: "The broth is really what makes it, right?"<br>B: "Totally, though the texture matters too."<br>C: "I love the aroma of the garnish most."<br>\u2192 The person holding "soba" tends to speak from a slightly different angle \u2014 that subtle mismatch is your clue.'
+    },
+    votingTitle: { ja: '2つの投票方式', en: 'Two Voting Modes' },
+    votingBody: { ja: '討議のあと、誰が一匹狼かを決める方法は2種類から選べます。グループの雰囲気に合わせて使い分けてみてください。', en: 'After the discussion, you can choose between two ways to decide who the lone wolf is. Pick whichever fits your group\u2019s mood.' },
+    voteIndividualTitle: { ja: '1人ずつ投票', en: 'Vote One by One' },
+    voteIndividual1: { ja: 'スマホをパスして、1人ずつ秘密で投票', en: 'Pass the phone and vote secretly, one person at a time' },
+    voteIndividual2: { ja: '他の人の投票に影響されない', en: 'Not influenced by anyone else\u2019s vote' },
+    voteIndividual3: { ja: 'じっくり考えたい時向き', en: 'Good for when you want to think it through' },
+    voteGroupTitle: { ja: 'せーの方式', en: 'All-at-Once' },
+    voteGroup1: { ja: 'パス不要、全員同時に指差し', en: 'No passing \u2014 everyone points at the same time' },
+    voteGroup2: { ja: 'テンポが良く盛り上がりやすい', en: 'Fast-paced and exciting' },
+    voteGroup3: { ja: '大人数でも短時間で決着', en: 'Settles things quickly even with large groups' },
+    tipsTitle: { ja: '上手に遊ぶコツ', en: 'Tips for Playing Well' },
+    tip1Title: { ja: '多数派は、あえて曖昧に話す', en: 'If you\u2019re the majority, stay a little vague' },
+    tip1Body: { ja: '具体的すぎる発言は、一匹狼に情報を与えすぎてしまいます。少し抽象的な言い回しから始めると、探り合いが長く楽しめます。', en: 'Being too specific gives the lone wolf too much to work with. Starting with vaguer phrasing keeps the guessing game fun for longer.' },
+    tip2Title: { ja: '一匹狼は、周りの話をよく聞いて合わせる', en: 'If you\u2019re the lone wolf, listen closely and blend in' },
+    tip2Body: { ja: 'いきなり具体的な特徴を言うと、噛み合わなさがバレやすくなります。まずは周りの発言に相槌を打ちながら、方向性を探るのがコツです。', en: 'Jumping straight to specific details makes the mismatch obvious. Start by agreeing with others while you figure out the direction of the conversation.' },
+    tip3Title: { ja: '「話すきっかけ」を活用する', en: 'Use the conversation starters' },
+    tip3Body: { ja: '討議画面に表示される質問例は、会話が広がりにくい時のヒントになります。困ったらそこから話し始めてみてください。', en: 'The sample questions on the discussion screen help when conversation stalls. If you\u2019re stuck, start there.' },
+    tip4Title: { ja: '人数が多い時は一匹狼を複数人に', en: 'With more players, add more wolves' },
+    tip4Body: { ja: '6人以上集まる場合、一匹狼の人数を2人以上に増やすと、より駆け引きが複雑になり盛り上がります。', en: 'With 6 or more players, increasing the number of wolves to 2 or more adds a richer layer of strategy and excitement.' },
+    faqTitle: { ja: 'よくある質問', en: 'Frequently Asked Questions' },
+    faq1Q: { ja: '一匹狼の人数は自由に決められますか？', en: 'Can I freely choose the number of wolves?' },
+    faq1A: { ja: 'A. はい。セットアップ画面の「一匹狼の人数」で、＋／−ボタンから自由に増減できます(参加人数に応じて上限が自動調整されます)。', en: 'A. Yes. Use the +/\u2212 buttons under "Number of Wolves" on the setup screen (the maximum auto-adjusts based on player count).' },
+    faq2Q: { ja: '一匹狼が複数人いる時、勝敗はどう決まりますか？', en: 'How is the winner decided with multiple wolves?' },
+    faq2A: { ja: 'A. 一匹狼を過不足なく全員言い当てられた場合のみ市民側の勝利です。1人でも取り逃がしたり、無関係な人を巻き込んだりすると一匹狼側の勝利になります。', en: 'A. The citizens win only if every wolf is identified exactly, with no misses and no innocent players accused. Missing even one wolf, or wrongly accusing someone, means the wolves win.' },
+    faq3Q: { ja: 'お題の難易度はどう違うのですか？', en: 'What\u2019s the difference between difficulty levels?' },
+    faq3A: { ja: 'A. 「やさしい」は多数派と一匹狼のお題がはっきり異なるもの、「むずかしい」はジャンルが近く見分けにくいものです。慣れないうちは「やさしい」がおすすめです。', en: 'A. "Easy" pairs have clearly different majority/wolf topics, while "Hard" pairs are close in genre and harder to distinguish. "Easy" is recommended until you get the hang of it.' },
+    faq4Q: { ja: '自分でお題を追加できますか？', en: 'Can I add my own topics?' },
+    faq4A: { ja: 'A. できます。ただしネタバレ防止のため、その場で追加したお題ペアは今回のプレイには使われず、次回以降に使えるようになります。', en: 'A. Yes. To prevent spoilers, topic pairs added during a session aren\u2019t used in that same round \u2014 they become available starting next time.' },
+    ctaTitle: { ja: '準備はできましたか？', en: 'Ready to play?' },
+    ctaBody: { ja: 'スマホ1台、3人集まればすぐに始められます。', en: 'One phone, three people \u2014 that\u2019s all you need to start.' },
+    ctaBtn: { ja: '一匹狼を遊ぶ →', en: 'Play Ippikiokami →' },
+    footerHome: { ja: '一匹狼トップへ', en: 'Ippikiokami Home' },
+    footerOther: { ja: '糸口を見る', en: 'See Itoguchi' },
+    footerAbout: { ja: 'よりあいについて', en: 'About Yoriai' }
+  };
+
+  function getLang() {
+    try { return localStorage.getItem(LANG_KEY) || 'ja'; } catch (e) { return 'ja'; }
+  }
+  function applyLanguage(lang) {
+    document.documentElement.lang = lang;
+    document.querySelectorAll('[data-i18n]').forEach(function (el) {
+      var entry = I18N[el.getAttribute('data-i18n')];
+      if (entry) el.innerHTML = entry[lang] || entry.ja;
+    });
+    var toggle = document.getElementById('langToggle');
+    if (toggle) toggle.textContent = lang === 'ja' ? 'EN' : '日本語';
+  }
+  function setLang(lang) {
+    try { localStorage.setItem(LANG_KEY, lang); } catch (e) {}
+    applyLanguage(lang);
+  }
+  document.getElementById('langToggle').addEventListener('click', function () {
+    setLang(getLang() === 'ja' ? 'en' : 'ja');
+  });
+  applyLanguage(getLang());
+})();
+</script>
+</body>
+</html>

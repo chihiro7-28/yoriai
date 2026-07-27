@@ -461,6 +461,13 @@ html.lang-en .splash-caption{display:block;}
   display:flex;flex-direction:column;align-items:center;gap:20px;
   padding:40px;text-align:center;width:100%;
 }
+.lang-toggle{
+  position:absolute;top:calc(env(safe-area-inset-top,0px) + 18px);right:22px;
+  background:var(--ink-2);border:1px solid var(--gold-dim);color:var(--gold);
+  font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700;letter-spacing:1px;
+  padding:8px 14px;cursor:pointer;z-index:3;
+}
+.lang-toggle:active{background:rgba(168,118,31,0.12);}
 .title-badge{
   display:flex;gap:10px;margin-bottom:4px;
 }
@@ -534,6 +541,23 @@ html.lang-en .splash-caption{display:block;}
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="manifest.json">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Game",
+  "name": "一匹狼",
+  "alternateName": "Ippikiokami",
+  "url": "https://chihiro7-28.github.io/yoriai/games/ippikiokami/",
+  "description": "多数派には同じお題、少数派だけ少し違うお題が配られる正体隠匿ゲーム。スマホ1台、3人から遊べます。",
+  "genre": "パーティーゲーム",
+  "playMode": "MultiPlayer",
+  "numberOfPlayers": { "@type": "QuantitativeValue", "minValue": 3 },
+  "applicationCategory": "GameApplication",
+  "operatingSystem": "Any (Web Browser)",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "JPY" },
+  "isPartOf": { "@type": "WebSite", "name": "よりあい", "url": "https://chihiro7-28.github.io/yoriai/" }
+}
+</script>
 </head>
 <body>
 <div class="splash" id="splash">
@@ -550,7 +574,8 @@ html.lang-en .splash-caption{display:block;}
 <!-- ===== スタート画面 ===== -->
 <div id="title" class="screen active">
   <div class="title-inner fade">
-    <a href="../../" class="btn-plain" style="margin-bottom:6px;">← ゲーム一覧へ</a>
+    <button class="lang-toggle" id="langToggle" type="button">EN</button>
+    <a href="../../" class="btn-plain" style="margin-bottom:6px;" data-i18n="backToHub">← ゲーム一覧へ</a>
     <div class="title-badge">
       <div class="title-badge-dot d1"></div>
       <div class="title-badge-dot d2"></div>
@@ -558,8 +583,9 @@ html.lang-en .splash-caption{display:block;}
     </div>
     <div class="title-main">一匹狼</div>
     <div class="title-caption">IPPIKI OKAMI</div>
-    <div class="title-sub">多数派には同じお題、あなただけ違うかも。<br>会話から、たった1人を見つけ出そう</div>
-    <button class="btn btn-primary" id="titleStartBtn" style="max-width:260px;">ゲームスタート →</button>
+    <div class="title-sub" data-i18n="titleSub">多数派には同じお題、あなただけ違うかも。<br>会話から、たった1人を見つけ出そう</div>
+    <button class="btn btn-primary" id="titleStartBtn" style="max-width:260px;" data-i18n="titleStart">ゲームスタート →</button>
+    <a href="guide.html" class="btn-plain" style="margin-top:14px;" data-i18n="titleGuide">📖 遊び方をくわしく見る</a>
   </div>
 </div>
 
@@ -567,27 +593,27 @@ html.lang-en .splash-caption{display:block;}
 <div id="setup" class="screen">
   <div class="file-header">
     <div class="file-tag serif">一匹狼</div>
-    <div class="file-no">正体隠匿ゲーム</div>
+    <div class="file-no" data-i18n="setupSubtitle">正体隠匿ゲーム</div>
   </div>
   <div class="scroll-body">
     <div class="section-title">MEMBERS</div>
     <div class="player-row">
-      <input class="player-input" id="playerInput" type="text" placeholder="名前を入力" maxlength="10" autocomplete="off">
+      <input class="player-input" id="playerInput" type="text" placeholder="名前を入力" data-i18n-placeholder="playerInputPh" maxlength="10" autocomplete="off">
       <button class="add-btn" id="addPlayerBtn">＋</button>
     </div>
     <div class="player-list" id="playerList"></div>
 
-    <div class="section-title">カテゴリ</div>
+    <div class="section-title" data-i18n="categoryLabel">カテゴリ</div>
     <div class="cat-tabs" id="categoryTabs"></div>
 
-    <div class="section-title">難易度</div>
+    <div class="section-title" data-i18n="difficultyLabel">難易度</div>
     <div class="cat-tabs" id="difficultyTabs"></div>
 
-    <div class="section-title">投票方式</div>
+    <div class="section-title" data-i18n="voteModeLabel">投票方式</div>
     <div class="cat-tabs" id="voteModeTabs"></div>
     <div class="custom-pair-note" id="voteModeNote"></div>
 
-    <div class="section-title">一匹狼の人数</div>
+    <div class="section-title" data-i18n="wolfCountLabel">一匹狼の人数</div>
     <div class="stepper">
       <button type="button" class="stepper-btn" id="wolfCountMinus">−</button>
       <div class="stepper-value" id="wolfCountValue">1</div>
@@ -595,20 +621,20 @@ html.lang-en .splash-caption{display:block;}
     </div>
     <div class="custom-pair-note" id="wolfCountNote"></div>
 
-    <div class="section-title">討議時間</div>
+    <div class="section-title" data-i18n="timerLabel">討議時間</div>
     <div class="cat-tabs" id="timerLengthTabs"></div>
 
-    <div class="section-title">お題を自分で追加</div>
+    <div class="section-title" data-i18n="customPairSectionTitle">お題を自分で追加</div>
     <div class="custom-add-row">
-      <input class="player-input" id="customPairMajorInput" type="text" placeholder="多数派の言葉" maxlength="14" autocomplete="off">
-      <input class="player-input" id="customPairMinorInput" type="text" placeholder="少数派の言葉" maxlength="14" autocomplete="off">
+      <input class="player-input" id="customPairMajorInput" type="text" placeholder="多数派の言葉" data-i18n-placeholder="majorInputPh" maxlength="14" autocomplete="off">
+      <input class="player-input" id="customPairMinorInput" type="text" placeholder="少数派の言葉" data-i18n-placeholder="minorInputPh" maxlength="14" autocomplete="off">
       <button class="add-btn" id="addPairBtn">＋</button>
     </div>
-    <div class="custom-pair-note">※ネタバレ防止のため、追加したお題は次回以降のプレイから使われます(今回のラウンドでは使われません)</div>
+    <div class="custom-pair-note" data-i18n="customPairNote">※ネタバレ防止のため、追加したお題は次回以降のプレイから使われます(今回のラウンドでは使われません)</div>
     <div class="theme-list" id="customPairList"></div>
   </div>
   <div class="footer-area">
-    <button class="btn btn-primary" id="startBtn" disabled>この内容で開始 →</button>
+    <button class="btn btn-primary" id="startBtn" disabled data-i18n="startBtn">この内容で開始 →</button>
   </div>
 </div>
 
@@ -619,7 +645,7 @@ html.lang-en .splash-caption{display:block;}
     <div class="handoff-name serif" id="handoffName">—</div>
     <div class="handoff-progress" id="handoffProgress">1 / 6</div>
     <div class="handoff-msg" id="handoffMsgText">他の人に画面を見られないように渡してください</div>
-    <button class="btn btn-primary" id="handoffOpenBtn" style="max-width:240px;">受け取った →</button>
+    <button class="btn btn-primary" id="handoffOpenBtn" style="max-width:240px;" data-i18n="handoffOpenBtnDefault">受け取った →</button>
   </div>
 </div>
 
@@ -633,7 +659,7 @@ html.lang-en .splash-caption{display:block;}
           <div class="card-back-pattern">
             <div class="card-back-logo">狼</div>
           </div>
-          <div class="card-hint">タップしてめくる</div>
+          <div class="card-hint" data-i18n="cardHint">タップしてめくる</div>
         </div>
         <div class="card-face card-front">
           <div class="card-center">
@@ -644,8 +670,8 @@ html.lang-en .splash-caption{display:block;}
         </div>
       </div>
     </div>
-    <div class="handoff-msg">お題は他の人に見せないでください</div>
-    <button class="btn btn-primary" id="revealNextBtn" style="max-width:240px;display:none;">伏せて次の人へ渡す →</button>
+    <div class="handoff-msg" data-i18n="revealMsg">お題は他の人に見せないでください</div>
+    <button class="btn btn-primary" id="revealNextBtn" style="max-width:240px;display:none;" data-i18n="revealNextBtn">伏せて次の人へ渡す →</button>
   </div>
 </div>
 
@@ -653,52 +679,52 @@ html.lang-en .splash-caption{display:block;}
 <div id="discuss" class="screen">
   <div class="discuss-eyebrow">CATEGORY</div>
   <div class="discuss-theme serif" id="discussCategory">—</div>
-  <div class="discuss-rule">
+  <div class="discuss-rule" data-i18n="discussRule">
     自分のお題は明かさずに、これについて自由に話そう。<br>
     1人だけ、少し違うお題を持っています。<br>
     誰が「一匹狼」か、会話から見つけ出そう。
   </div>
   <div class="hint-box">
-    <div class="hint-label">話すきっかけ</div>
+    <div class="hint-label" data-i18n="hintLabel">話すきっかけ</div>
     <ul class="hint-list" id="hintList"></ul>
-    <button class="btn-plain" id="hintRefreshBtn">↻ 別の質問にする</button>
+    <button class="btn-plain" id="hintRefreshBtn" data-i18n="hintRefreshBtn">↻ 別の質問にする</button>
   </div>
   <div class="timer-box">
     <div class="timer-display" id="timerDisplay">03:00</div>
     <div class="timer-controls">
-      <button class="btn btn-ghost" id="timerStartBtn">開始</button>
-      <button class="btn btn-ghost" id="timerResetBtn">リセット</button>
+      <button class="btn btn-ghost" id="timerStartBtn" data-i18n="timerStart">開始</button>
+      <button class="btn btn-ghost" id="timerResetBtn" data-i18n="timerReset">リセット</button>
     </div>
   </div>
-  <button class="btn btn-primary" id="toVoteBtn" style="max-width:260px;">投票へ進む →</button>
+  <button class="btn btn-primary" id="toVoteBtn" style="max-width:260px;" data-i18n="toVoteBtn">投票へ進む →</button>
 </div>
 
 <!-- ===== 投票画面 ===== -->
 <div id="vote" class="screen">
   <div class="file-header">
-    <div class="file-tag serif">VOTE</div>
+    <div class="file-tag serif" data-i18n="voteFileTag">VOTE</div>
     <div class="file-no" id="voteFileNo">一匹狼だと思う人を選ぼう</div>
   </div>
   <div class="scroll-body">
     <div class="check-name-list" id="voteNameList"></div>
   </div>
   <div class="footer-area">
-    <button class="btn btn-primary" id="voteConfirmBtn" disabled>この人に投票する →</button>
+    <button class="btn btn-primary" id="voteConfirmBtn" disabled data-i18n="voteConfirmDefault">この人に投票する →</button>
   </div>
 </div>
 
 <!-- ===== せーの方式の投票画面(パス不要・その場で1回だけ入力) ===== -->
 <div id="groupvote" class="screen">
   <div class="file-header">
-    <div class="file-tag serif">せーの</div>
-    <div class="file-no">怪しい人をタップ</div>
+    <div class="file-tag serif" data-i18n="groupVoteTag">せーの</div>
+    <div class="file-no" data-i18n="groupVoteSubtitle">怪しい人をタップ</div>
   </div>
   <div class="scroll-body">
     <div class="handoff-msg" id="groupVoteMsg" style="margin-bottom:18px;"></div>
     <div class="check-name-list" id="groupVoteList"></div>
   </div>
   <div class="footer-area">
-    <button class="btn btn-primary" id="groupVoteConfirmBtn" disabled>この内容で決定 →</button>
+    <button class="btn btn-primary" id="groupVoteConfirmBtn" disabled data-i18n="groupVoteConfirmDefault">この内容で決定 →</button>
   </div>
 </div>
 
@@ -710,29 +736,29 @@ html.lang-en .splash-caption{display:block;}
 
     <div class="reveal-summary" id="revealSummary"></div>
 
-    <div class="section-title" id="voteLedgerTitle" style="margin:0 22px 10px;">投票結果</div>
+    <div class="section-title" id="voteLedgerTitle" style="margin:0 22px 10px;" data-i18n="voteLedgerTitleDefault">投票結果</div>
     <div class="result-ledger" id="voteLedger"></div>
 
     <!-- ===== 広告枠(ラウンド間) =====
          AdSense等の審査が通ったら、この中にins.adsbygoogleタグを入れる想定。
          今はプレースホルダーのみ表示。 -->
-    <div class="ad-slot" id="adSlot">広告スペース</div>
+    <div class="ad-slot" id="adSlot" data-i18n="adSlot">広告スペース</div>
   </div>
   <div class="footer-area" style="display:flex;flex-direction:column;gap:10px;">
-    <button class="btn btn-ghost" id="shareResultBtn">📤 結果をシェア</button>
-    <button class="btn btn-primary" id="replaySameBtn">同じメンバーでもう一度 →</button>
-    <button class="btn btn-plain" id="replayAllBtn">最初からやり直す</button>
+    <button class="btn btn-ghost" id="shareResultBtn" data-i18n="shareResultBtn">📤 結果をシェア</button>
+    <button class="btn btn-primary" id="replaySameBtn" data-i18n="replaySameBtn">同じメンバーでもう一度 →</button>
+    <button class="btn btn-plain" id="replayAllBtn" data-i18n="replayAllBtn">最初からやり直す</button>
   </div>
 </div>
 
 <!-- ===== 結果シェア用モーダル ===== -->
 <div class="share-modal" id="shareModal">
   <div class="share-modal-inner fade">
-    <img class="share-modal-img" id="shareModalImg" alt="結果画像のプレビュー">
-    <div class="share-modal-hint">画像を長押しで保存、またはリンクからダウンロードしてね</div>
+    <img class="share-modal-img" id="shareModalImg" alt="結果画像のプレビュー" data-i18n-alt="shareModalAlt">
+    <div class="share-modal-hint" data-i18n="shareModalHint">画像を長押しで保存、またはリンクからダウンロードしてね</div>
     <div class="share-modal-actions">
-      <a class="btn btn-ghost" id="shareModalDownload" download="ippikiokami-result.png">保存する</a>
-      <button class="btn btn-plain" id="shareModalClose" style="flex:1;">閉じる</button>
+      <a class="btn btn-ghost" id="shareModalDownload" download="ippikiokami-result.png" data-i18n="shareModalDownload">保存する</a>
+      <button class="btn btn-plain" id="shareModalClose" style="flex:1;" data-i18n="closeBtn">閉じる</button>
     </div>
   </div>
 </div>
@@ -748,14 +774,141 @@ html.lang-en .splash-caption{display:block;}
    バックエンド無し・完全ローカル動作。
    ========================================================================== */
 
-// ホーム画面などで選ばれた言語設定を読み取って反映する(本格対応は後続で追加)
-(function () {
-  try {
-    if (localStorage.getItem('yoriai_lang') === 'en') {
-      document.documentElement.classList.add('lang-en');
-    }
-  } catch (e) {}
-})();
+/* ============================================================
+   英語対応(ページ内切り替え・localStorageで言語設定を共有)
+   ============================================================ */
+const LANG_KEY = 'yoriai_lang';
+let currentLang = 'ja';
+
+const STATIC_I18N = {
+  backToHub: { ja: '← ゲーム一覧へ', en: '← All Games' },
+  titleSub: { ja: '多数派には同じお題、あなただけ違うかも。<br>会話から、たった1人を見つけ出そう', en: 'Everyone shares the same topic \u2014 except maybe you.<br>Find the odd one out through conversation.' },
+  titleStart: { ja: 'ゲームスタート →', en: 'Start Game →' },
+  titleGuide: { ja: '📖 遊び方をくわしく見る', en: '📖 How to Play' },
+  setupSubtitle: { ja: '正体隠匿ゲーム', en: 'Hidden-Role Game' },
+  playerInputPh: { ja: '名前を入力', en: 'Enter a name' },
+  categoryLabel: { ja: 'カテゴリ', en: 'Category' },
+  difficultyLabel: { ja: '難易度', en: 'Difficulty' },
+  voteModeLabel: { ja: '投票方式', en: 'Voting Mode' },
+  wolfCountLabel: { ja: '一匹狼の人数', en: 'Number of Wolves' },
+  timerLabel: { ja: '討議時間', en: 'Discussion Time' },
+  customPairSectionTitle: { ja: 'お題を自分で追加', en: 'Add Your Own Topic' },
+  majorInputPh: { ja: '多数派の言葉', en: 'Majority word' },
+  minorInputPh: { ja: '少数派の言葉', en: 'Minority word' },
+  customPairNote: { ja: '※ネタバレ防止のため、追加したお題は次回以降のプレイから使われます(今回のラウンドでは使われません)', en: '\u203bTo avoid spoilers, added topics are only used from your next session onward (not this round).' },
+  startBtn: { ja: 'この内容で開始 →', en: 'Start with This Setup →' },
+  handoffOpenBtnDefault: { ja: '受け取った →', en: 'Got It →' },
+  cardHint: { ja: 'タップしてめくる', en: 'Tap to reveal' },
+  revealMsg: { ja: 'お題は他の人に見せないでください', en: "Don't let anyone else see your topic." },
+  revealNextBtn: { ja: '伏せて次の人へ渡す →', en: 'Hide It & Pass to Next →' },
+  discussRule: {
+    ja: '自分のお題は明かさずに、これについて自由に話そう。<br>1人だけ、少し違うお題を持っています。<br>誰が「一匹狼」か、会話から見つけ出そう。',
+    en: 'Talk freely about your topic without revealing it.<br>One person has a slightly different topic.<br>Find the \u201clone wolf\u201d through conversation.'
+  },
+  hintLabel: { ja: '話すきっかけ', en: 'Conversation Starters' },
+  hintRefreshBtn: { ja: '↻ 別の質問にする', en: '↻ Show Different Questions' },
+  timerStart: { ja: '開始', en: 'Start' },
+  timerReset: { ja: 'リセット', en: 'Reset' },
+  toVoteBtn: { ja: '投票へ進む →', en: 'Move to Voting →' },
+  voteFileTag: { ja: 'VOTE', en: 'VOTE' },
+  voteConfirmDefault: { ja: 'この人に投票する →', en: 'Vote for This Person →' },
+  groupVoteTag: { ja: 'せーの', en: 'ON 3' },
+  groupVoteSubtitle: { ja: '怪しい人をタップ', en: 'Tap Who You Suspect' },
+  groupVoteConfirmDefault: { ja: 'この内容で決定 →', en: 'Confirm →' },
+  voteLedgerTitleDefault: { ja: '投票結果', en: 'Vote Results' },
+  adSlot: { ja: '広告スペース', en: 'Ad space' },
+  shareResultBtn: { ja: '📤 結果をシェア', en: '📤 Share Result' },
+  replaySameBtn: { ja: '同じメンバーでもう一度 →', en: 'Replay with Same Players →' },
+  replayAllBtn: { ja: '最初からやり直す', en: 'Start Over' },
+  shareModalAlt: { ja: '結果画像のプレビュー', en: 'Result image preview' },
+  shareModalHint: { ja: '画像を長押しで保存、またはリンクからダウンロードしてね', en: 'Long-press the image to save, or use the download link.' },
+  shareModalDownload: { ja: '保存する', en: 'Save' },
+  closeBtn: { ja: '閉じる', en: 'Close' }
+};
+
+const T = {
+  customCategoryLabel: { ja: '自作のお題', en: 'Custom topic' },
+  emptyPlayerList: { ja: 'まだ誰も追加されていません。3人以上で遊べます。', en: 'No one added yet. Playable with 3 or more.' },
+  pendingSuffix: { ja: '　(次回から使用可)', en: '  (usable next time)' },
+  wolfCountNote: { ja: max => '今の人数だと最大' + max + '人まで。多数派が少数派より多くなるように自動で上限を調整しています。', en: max => 'Up to ' + max + ' with this many players. The limit auto-adjusts so the majority always outnumbers the wolves.' },
+  handoffOpenReveal: { ja: '受け取った。お題を見る →', en: 'Got it. Reveal My Topic →' },
+  handoffOpenVote: { ja: '受け取った。投票する →', en: 'Got it. Vote →' },
+  handoffMsgReveal: { ja: '他の人に画面を見られないように渡してください', en: 'Pass the phone without letting anyone else see the screen.' },
+  handoffMsgVote: { ja: '誰が一匹狼だと思うか、他の人に見られないように選んでください', en: 'Choose who you suspect, without anyone else seeing.' },
+  revealCategoryEcho: { ja: name => 'カテゴリ:「' + name + '」', en: name => 'Category: \u201c' + name + '\u201d' },
+  timerStartLabel: { ja: '開始', en: 'Start' },
+  timerResumeLabel: { ja: '再開', en: 'Resume' },
+  timerPauseLabel: { ja: '一時停止', en: 'Pause' },
+  groupVoteMsg: { ja: n => 'せーの、で全員一斉に指を差そう。怪しいと思う人を' + n + '人タップしてください。', en: n => 'On the count of three, everyone points at once. Tap ' + n + ' suspect' + (n === 1 ? '' : 's') + '.' },
+  groupVoteConfirmProgress: { ja: (sel, n) => '(' + sel + '/' + n + '人選択) この内容で決定 →', en: (sel, n) => '(' + sel + '/' + n + ' selected) Confirm →' },
+  voteConfirmSingle: { ja: 'この人に投票する →', en: 'Vote for This Person →' },
+  voteConfirmProgress: { ja: (sel, n) => '(' + sel + '/' + n + '人選択) 決定する →', en: (sel, n) => '(' + sel + '/' + n + ' selected) Confirm →' },
+  voteFileNoSingle: { ja: '一匹狼だと思う人を選ぼう', en: 'Choose who you think is the lone wolf' },
+  voteFileNoMulti: { ja: n => '怪しいと思う人を' + n + '人選ぼう', en: n => 'Choose ' + n + ' people you suspect' },
+  verdictSuccess: { ja: '正体をあばいた！<span class="result-verdict-en">CITIZENS WIN</span>', en: 'Unmasked!<span class="result-verdict-en">CITIZENS WIN</span>' },
+  verdictFail: { ja: '取り逃がした…<span class="result-verdict-en">WOLF WINS</span>', en: 'They got away\u2026<span class="result-verdict-en">WOLF WINS</span>' },
+  resultSubTie: { ja: '票が割れて、決め手に欠けました…', en: 'The votes were split \u2014 no clear decision\u2026' },
+  resultSubSuccess: { ja: names => names + 'を過不足なく正しく言い当てました', en: names => 'Correctly identified exactly: ' + names },
+  resultSubFail: { ja: names => names + 'を疑いましたが、一匹狼を取り逃がしました', en: names => 'Suspected ' + names + ', but the lone wolf got away.' },
+  revealSummary: {
+    ja: (maj, min, wolves) => '多数派のお題：<b>' + maj + '</b><br>一匹狼のお題：<b>' + min + '</b><br>一匹狼だったのは… <b>' + wolves + '</b>',
+    en: (maj, min, wolves) => 'Majority topic: <b>' + maj + '</b><br>Lone wolf topic: <b>' + min + '</b><br>The lone wolf was\u2026 <b>' + wolves + '</b>'
+  },
+  voteResultsTitle: { ja: '投票結果', en: 'Vote Results' },
+  groupResultsTitle: { ja: 'せーのの結果', en: 'On-3 Results' },
+  suspectTag: { ja: '（容疑者）', en: ' (suspected)' },
+  pointedTag: { ja: '（指をさされた）', en: ' (pointed at)' },
+  votesUnit: { ja: n => n + '票', en: n => n + (n === 1 ? ' vote' : ' votes') },
+  shareCreating: { ja: '画像を作成中…', en: 'Creating image\u2026' },
+  shareTitle: { ja: '一匹狼', en: 'Lone Wolf' },
+  shareText: { ja: name => '「' + name + '」で遊んだ結果はこちら！', en: name => 'Here\u2019s how our round of \u201c' + name + '\u201d went!' },
+  replayArmed: { ja: '⚠️ もう一度タップで全部消えます', en: '⚠️ Tap again to erase everything' }
+};
+
+function L(labelObj) { return labelObj[currentLang] || labelObj.ja; }
+
+function t(key, ...args) {
+  const entry = T[key];
+  if (!entry) return key;
+  const val = entry[currentLang] || entry.ja;
+  return typeof val === 'function' ? val(...args) : val;
+}
+
+function getLang() {
+  try { return localStorage.getItem(LANG_KEY) || 'ja'; } catch (e) { return 'ja'; }
+}
+
+function applyLanguage(lang) {
+  currentLang = lang;
+  document.documentElement.lang = lang;
+  document.documentElement.classList.toggle('lang-en', lang === 'en');
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const entry = STATIC_I18N[el.getAttribute('data-i18n')];
+    if (entry) el.innerHTML = entry[lang] || entry.ja;
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const entry = STATIC_I18N[el.getAttribute('data-i18n-placeholder')];
+    if (entry) el.placeholder = entry[lang] || entry.ja;
+  });
+  document.querySelectorAll('[data-i18n-alt]').forEach(el => {
+    const entry = STATIC_I18N[el.getAttribute('data-i18n-alt')];
+    if (entry) el.alt = entry[lang] || entry.ja;
+  });
+  const toggle = document.getElementById('langToggle');
+  if (toggle) toggle.textContent = lang === 'ja' ? 'EN' : '日本語';
+}
+
+function setLang(lang) {
+  try { localStorage.setItem(LANG_KEY, lang); } catch (e) {}
+  applyLanguage(lang);
+  if (typeof renderPlayerList === 'function') renderPlayerList();
+  if (typeof renderCategoryTabs === 'function') renderCategoryTabs();
+  if (typeof renderDifficultyTabs === 'function') renderDifficultyTabs();
+  if (typeof renderVoteModeTabs === 'function') renderVoteModeTabs();
+  if (typeof renderTimerLengthTabs === 'function') renderTimerLengthTabs();
+  if (typeof renderWolfCountStepper === 'function') renderWolfCountStepper();
+  if (typeof renderCustomPairList === 'function') renderCustomPairList();
+}
 
 const MIN_PLAYERS = 3;
 const PLAYERS_KEY = 'ippikiokami_players';
@@ -979,50 +1132,50 @@ const WORD_PAIRS = [
 ];
 
 const CATEGORIES = [
-  { key: 'all', label: 'すべて' },
-  { key: 'food', label: '食べ物' },
-  { key: 'animal', label: '生き物' },
-  { key: 'daily', label: '日常' },
-  { key: 'place', label: '場所' },
-  { key: 'hobby', label: '趣味' },
+  { key: 'all', label: { ja: 'すべて', en: 'All' } },
+  { key: 'food', label: { ja: '食べ物', en: 'Food' } },
+  { key: 'animal', label: { ja: '生き物', en: 'Animals' } },
+  { key: 'daily', label: { ja: '日常', en: 'Daily Life' } },
+  { key: 'place', label: { ja: '場所', en: 'Places' } },
+  { key: 'hobby', label: { ja: '趣味', en: 'Hobbies' } },
 ];
 
 const DIFFICULTIES = [
-  { key: 'all', label: 'おまかせ' },
-  { key: 'easy', label: 'やさしい' },
-  { key: 'hard', label: 'むずかしい' },
+  { key: 'all', label: { ja: 'おまかせ', en: 'Random' } },
+  { key: 'easy', label: { ja: 'やさしい', en: 'Easy' } },
+  { key: 'hard', label: { ja: 'むずかしい', en: 'Hard' } },
 ];
 
 const VOTE_MODES = [
-  { key: 'individual', label: '1人ずつ投票' },
-  { key: 'group', label: 'せーの方式' },
+  { key: 'individual', label: { ja: '1人ずつ投票', en: 'Vote One by One' } },
+  { key: 'group', label: { ja: 'せーの方式', en: 'All-at-Once' } },
 ];
 const VOTE_MODE_NOTES = {
-  individual: '1人ずつパスして、他の人に見られないように秘密で投票します。',
-  group: 'パス不要。討議のあと、全員で「せーの」で指を差して、その場で1回だけ結果を入力します。',
+  individual: { ja: '1人ずつパスして、他の人に見られないように秘密で投票します。', en: 'Pass the phone one at a time and vote secretly, without others seeing.' },
+  group: { ja: 'パス不要。討議のあと、全員で「せーの」で指を差して、その場で1回だけ結果を入力します。', en: 'No passing needed. After discussing, everyone points at once, and the result is entered a single time.' },
 };
 
 const WOLF_COUNT_ABSOLUTE_MAX = 4; // どれだけ人数が多くても、これ以上は選べない上限
 
 const TIMER_LENGTH_OPTIONS = [
-  { key: 60, label: '1分' },
-  { key: 120, label: '2分' },
-  { key: 180, label: '3分' },
-  { key: 300, label: '5分' },
-  { key: 480, label: '8分' },
+  { key: 60, label: { ja: '1分', en: '1 min' } },
+  { key: 120, label: { ja: '2分', en: '2 min' } },
+  { key: 180, label: { ja: '3分', en: '3 min' } },
+  { key: 300, label: { ja: '5分', en: '5 min' } },
+  { key: 480, label: { ja: '8分', en: '8 min' } },
 ];
 
 const HINT_QUESTIONS = [
-  'これを最初に体験したのはいつ頃？',
-  'これを一言で表すなら？',
-  'これが好きな人って、どんな人だと思う？',
-  'これをイメージする色は？',
-  'これに近い季節をあげるなら？',
-  'これの値段、だいたいいくらくらい？',
-  'これを人に勧めるなら、どう説明する？',
-  'これを最近体験したのはいつ？',
-  'これの思い出、ひとつ挙げるなら？',
-  'これを表す音や擬音があるなら？',
+  { ja: 'これを最初に体験したのはいつ頃？', en: 'When did you first experience this?' },
+  { ja: 'これを一言で表すなら？', en: 'How would you describe this in one word?' },
+  { ja: 'これが好きな人って、どんな人だと思う？', en: 'What kind of person do you think likes this?' },
+  { ja: 'これをイメージする色は？', en: 'What color comes to mind for this?' },
+  { ja: 'これに近い季節をあげるなら？', en: 'What season does this remind you of?' },
+  { ja: 'これの値段、だいたいいくらくらい？', en: 'Roughly how much would this cost?' },
+  { ja: 'これを人に勧めるなら、どう説明する？', en: 'How would you describe this to recommend it?' },
+  { ja: 'これを最近体験したのはいつ？', en: 'When did you last experience this?' },
+  { ja: 'これの思い出、ひとつ挙げるなら？', en: 'Can you share a memory involving this?' },
+  { ja: 'これを表す音や擬音があるなら？', en: 'Is there a sound or noise you\u2019d associate with this?' },
 ];
 
 function escapeHtml(s) {
@@ -1235,7 +1388,7 @@ function showScreen(id) {
 function renderPlayerList() {
   const list = document.getElementById('playerList');
   if (!players.length) {
-    list.innerHTML = '<div class="player-empty">まだ誰も追加されていません。3人以上で遊べます。</div>';
+    list.innerHTML = '<div class="player-empty">' + t('emptyPlayerList') + '</div>';
   } else {
     list.innerHTML = players.map((name, i) =>
       '<div class="player-chip">' +
@@ -1270,7 +1423,7 @@ function addPlayer() {
 function renderCategoryTabs() {
   const el = document.getElementById('categoryTabs');
   el.innerHTML = CATEGORIES.map(c =>
-    '<div class="cat-tab' + (c.key === categoryFilter ? ' active' : '') + '" data-k="' + c.key + '">' + c.label + '</div>'
+    '<div class="cat-tab' + (c.key === categoryFilter ? ' active' : '') + '" data-k="' + c.key + '">' + L(c.label) + '</div>'
   ).join('');
   el.querySelectorAll('.cat-tab').forEach(t => {
     t.addEventListener('click', () => {
@@ -1284,7 +1437,7 @@ function renderCategoryTabs() {
 function renderDifficultyTabs() {
   const el = document.getElementById('difficultyTabs');
   el.innerHTML = DIFFICULTIES.map(d =>
-    '<div class="cat-tab' + (d.key === difficultyFilter ? ' active' : '') + '" data-k="' + d.key + '">' + d.label + '</div>'
+    '<div class="cat-tab' + (d.key === difficultyFilter ? ' active' : '') + '" data-k="' + d.key + '">' + L(d.label) + '</div>'
   ).join('');
   el.querySelectorAll('.cat-tab').forEach(t => {
     t.addEventListener('click', () => {
@@ -1298,7 +1451,7 @@ function renderDifficultyTabs() {
 function renderVoteModeTabs() {
   const el = document.getElementById('voteModeTabs');
   el.innerHTML = VOTE_MODES.map(v =>
-    '<div class="cat-tab' + (v.key === votingMode ? ' active' : '') + '" data-k="' + v.key + '">' + v.label + '</div>'
+    '<div class="cat-tab' + (v.key === votingMode ? ' active' : '') + '" data-k="' + v.key + '">' + L(v.label) + '</div>'
   ).join('');
   el.querySelectorAll('.cat-tab').forEach(t => {
     t.addEventListener('click', () => {
@@ -1307,7 +1460,7 @@ function renderVoteModeTabs() {
       playTapSound();
     });
   });
-  document.getElementById('voteModeNote').textContent = VOTE_MODE_NOTES[votingMode];
+  document.getElementById('voteModeNote').textContent = L(VOTE_MODE_NOTES[votingMode]);
 }
 
 // 人数に応じた人狼人数の上限。「多数派が必ず少数派より多い」を保つため、
@@ -1325,8 +1478,7 @@ function renderWolfCountStepper() {
   document.getElementById('wolfCountValue').textContent = wolfCount;
   document.getElementById('wolfCountMinus').disabled = wolfCount <= 1;
   document.getElementById('wolfCountPlus').disabled = wolfCount >= max;
-  document.getElementById('wolfCountNote').textContent =
-    '今の人数だと最大' + max + '人まで。多数派が少数派より多くなるように自動で上限を調整しています。';
+  document.getElementById('wolfCountNote').textContent = t('wolfCountNote', max);
 }
 
 function changeWolfCount(delta) {
@@ -1338,8 +1490,8 @@ function changeWolfCount(delta) {
 
 function renderTimerLengthTabs() {
   const el = document.getElementById('timerLengthTabs');
-  el.innerHTML = TIMER_LENGTH_OPTIONS.map(t =>
-    '<div class="cat-tab' + (t.key === discussSeconds ? ' active' : '') + '" data-k="' + t.key + '">' + t.label + '</div>'
+  el.innerHTML = TIMER_LENGTH_OPTIONS.map(opt =>
+    '<div class="cat-tab' + (opt.key === discussSeconds ? ' active' : '') + '" data-k="' + opt.key + '">' + L(opt.label) + '</div>'
   ).join('');
   el.querySelectorAll('.cat-tab').forEach(t => {
     t.addEventListener('click', () => {
@@ -1374,7 +1526,7 @@ function renderCustomPairList() {
       '<span class="del-theme" data-kind="usable" data-i="' + i + '">✕</span></div>'
   ).join('');
   const pendingHtml = customPairsPending.map((p, i) =>
-    '<div class="theme-item" style="opacity:0.6;">' + escapeHtml(p[0]) + ' ⇔ ' + escapeHtml(p[1]) + '　(次回から使用可)' +
+    '<div class="theme-item" style="opacity:0.6;">' + escapeHtml(p[0]) + ' ⇔ ' + escapeHtml(p[1]) + t('pendingSuffix') +
       '<span class="del-theme" data-kind="pending" data-i="' + i + '">✕</span></div>'
   ).join('');
   list.innerHTML = usableHtml + pendingHtml;
@@ -1417,7 +1569,8 @@ function getAvailablePairs() {
 
 function categoryLabelOf(key) {
   const found = CATEGORIES.find(c => c.key === key);
-  return found ? found.label : (key === 'custom' ? '自作のお題' : key);
+  if (found) return L(found.label);
+  return key === 'custom' ? t('customCategoryLabel') : key;
 }
 
 let lastPairKey = null;
@@ -1472,11 +1625,9 @@ function goToHandoff(phase) {
   document.getElementById('handoffName').textContent = players[idx];
   document.getElementById('handoffProgress').textContent = (idx + 1) + ' / ' + players.length;
   document.getElementById('handoffOpenBtn').textContent =
-    phase === 'reveal' ? '受け取った。お題を見る →' : '受け取った。投票する →';
+    phase === 'reveal' ? t('handoffOpenReveal') : t('handoffOpenVote');
   document.getElementById('handoffMsgText').textContent =
-    phase === 'reveal'
-      ? '他の人に画面を見られないように渡してください'
-      : '誰が一匹狼だと思うか、他の人に見られないように選んでください';
+    phase === 'reveal' ? t('handoffMsgReveal') : t('handoffMsgVote');
   showScreen('handoff');
 }
 
@@ -1490,7 +1641,7 @@ function openReveal() {
   document.getElementById('revealFileNo').textContent = String(revealIndex + 1).padStart(2, '0');
   const a = assignments[revealIndex];
   document.getElementById('revealWord').textContent = a.word;
-  document.getElementById('revealCategoryEcho').textContent = 'カテゴリ:「' + currentCategoryLabel + '」';
+  document.getElementById('revealCategoryEcho').textContent = t('revealCategoryEcho', currentCategoryLabel);
   document.getElementById('revealNextBtn').style.display = 'none';
   showScreen('reveal');
 }
@@ -1528,7 +1679,7 @@ function setupDiscussScreen() {
 
 function renderHints() {
   const shuffled = HINT_QUESTIONS.slice().sort(() => Math.random() - 0.5).slice(0, 3);
-  document.getElementById('hintList').innerHTML = shuffled.map(q => '<li>' + escapeHtml(q) + '</li>').join('');
+  document.getElementById('hintList').innerHTML = shuffled.map(q => '<li>' + escapeHtml(L(q)) + '</li>').join('');
 }
 
 function formatTime(sec) {
@@ -1545,7 +1696,7 @@ function resetTimer() {
   const display = document.getElementById('timerDisplay');
   display.textContent = formatTime(timerRemaining);
   display.classList.remove('done');
-  document.getElementById('timerStartBtn').textContent = '開始';
+  document.getElementById('timerStartBtn').textContent = t('timerStartLabel');
 }
 
 function toggleTimer() {
@@ -1553,11 +1704,11 @@ function toggleTimer() {
     clearInterval(timerInterval);
     timerInterval = null;
     timerRunning = false;
-    document.getElementById('timerStartBtn').textContent = '再開';
+    document.getElementById('timerStartBtn').textContent = t('timerResumeLabel');
     return;
   }
   timerRunning = true;
-  document.getElementById('timerStartBtn').textContent = '一時停止';
+  document.getElementById('timerStartBtn').textContent = t('timerPauseLabel');
   timerInterval = setInterval(() => {
     timerRemaining--;
     const display = document.getElementById('timerDisplay');
@@ -1567,7 +1718,7 @@ function toggleTimer() {
       timerInterval = null;
       timerRunning = false;
       display.classList.add('done');
-      document.getElementById('timerStartBtn').textContent = '開始';
+      document.getElementById('timerStartBtn').textContent = t('timerStartLabel');
       playTimerDoneSound();
       if (typeof navigator !== 'undefined' && navigator.vibrate) {
         try { navigator.vibrate([30, 60, 30]); } catch (e) {}
@@ -1591,11 +1742,10 @@ function goVoting() {
 
 function openGroupVote() {
   groupSelected = [];
-  document.getElementById('groupVoteMsg').textContent =
-    'せーの、で全員一斉に指を差そう。怪しいと思う人を' + wolfCount + '人タップしてください。';
+  document.getElementById('groupVoteMsg').textContent = t('groupVoteMsg', wolfCount);
   const btn = document.getElementById('groupVoteConfirmBtn');
   btn.disabled = true;
-  btn.textContent = '(0/' + wolfCount + '人選択) この内容で決定 →';
+  btn.textContent = t('groupVoteConfirmProgress', 0, wolfCount);
   renderGroupVoteList();
   showScreen('groupvote');
 }
@@ -1619,7 +1769,7 @@ function renderGroupVoteList() {
       renderGroupVoteList();
       const confirmBtn = document.getElementById('groupVoteConfirmBtn');
       confirmBtn.disabled = groupSelected.length !== wolfCount;
-      confirmBtn.textContent = '(' + groupSelected.length + '/' + wolfCount + '人選択) この内容で決定 →';
+      confirmBtn.textContent = t('groupVoteConfirmProgress', groupSelected.length, wolfCount);
       playTapSound();
     });
   });
@@ -1635,9 +1785,9 @@ function openVote() {
   selectedVoteTargets = [];
   const btn = document.getElementById('voteConfirmBtn');
   btn.disabled = true;
-  btn.textContent = wolfCount === 1 ? 'この人に投票する →' : '(0/' + wolfCount + '人選択) 決定する →';
+  btn.textContent = wolfCount === 1 ? t('voteConfirmSingle') : t('voteConfirmProgress', 0, wolfCount);
   document.getElementById('voteFileNo').textContent =
-    wolfCount === 1 ? '一匹狼だと思う人を選ぼう' : '怪しいと思う人を' + wolfCount + '人選ぼう';
+    wolfCount === 1 ? t('voteFileNoSingle') : t('voteFileNoMulti', wolfCount);
   renderVoteList();
   showScreen('vote');
 }
@@ -1663,8 +1813,8 @@ function renderVoteList() {
       const confirmBtn = document.getElementById('voteConfirmBtn');
       confirmBtn.disabled = selectedVoteTargets.length !== wolfCount;
       confirmBtn.textContent = wolfCount === 1
-        ? 'この人に投票する →'
-        : '(' + selectedVoteTargets.length + '/' + wolfCount + '人選択) 決定する →';
+        ? t('voteConfirmSingle')
+        : t('voteConfirmProgress', selectedVoteTargets.length, wolfCount);
       playTapSound();
     });
   });
@@ -1729,46 +1879,40 @@ function renderResult(tally, accusedIndices, success) {
   const accused = accusedIndices || [];
 
   verdict.style.display = 'block';
-  verdict.innerHTML = success
-    ? '正体をあばいた！<span class="result-verdict-en">CITIZENS WIN</span>'
-    : '取り逃がした…<span class="result-verdict-en">WOLF WINS</span>';
+  verdict.innerHTML = success ? t('verdictSuccess') : t('verdictFail');
   verdict.className = 'result-verdict serif fade ' + (success ? 'ok' : 'ng');
 
   const accusedNames = accused.map(i => players[i]).join('、');
   sub.textContent = accusedIndices === null
-    ? '票が割れて、決め手に欠けました…'
-    : (success
-      ? accusedNames + 'を過不足なく正しく言い当てました'
-      : accusedNames + 'を疑いましたが、一匹狼を取り逃がしました');
+    ? t('resultSubTie')
+    : (success ? t('resultSubSuccess', accusedNames) : t('resultSubFail', accusedNames));
 
   document.getElementById('revealSummary').innerHTML =
-    '多数派のお題：<b>' + escapeHtml(majorityWord) + '</b><br>' +
-    '一匹狼のお題：<b>' + escapeHtml(minorityWord) + '</b><br>' +
-    '一匹狼だったのは… <b>' + escapeHtml(lastWolfNames.join('、')) + '</b>';
+    t('revealSummary', escapeHtml(majorityWord), escapeHtml(minorityWord), escapeHtml(lastWolfNames.join('、')));
 
   const ledgerTitle = document.getElementById('voteLedgerTitle');
   const ledger = document.getElementById('voteLedger');
 
   if (tally) {
-    ledgerTitle.textContent = '投票結果';
+    ledgerTitle.textContent = t('voteResultsTitle');
     ledger.innerHTML = players.map((name, i) => {
       let cls = 'ledger-row';
       if (assignments[i].isWolf) cls += ' break';
       const mark = assignments[i].isWolf ? '🐺 ' : '';
-      const tag = accused.includes(i) ? '（容疑者）' : '';
+      const tag = accused.includes(i) ? t('suspectTag') : '';
       return '<div class="' + cls + '">' +
         '<span class="ledger-pos"></span>' +
         '<span class="ledger-name">' + mark + escapeHtml(name) + tag + '</span>' +
-        '<span class="ledger-num">' + tally[i] + '票</span>' +
+        '<span class="ledger-num">' + t('votesUnit', tally[i]) + '</span>' +
       '</div>';
     }).join('');
   } else {
-    ledgerTitle.textContent = 'せーのの結果';
+    ledgerTitle.textContent = t('groupResultsTitle');
     ledger.innerHTML = players.map((name, i) => {
       let cls = 'ledger-row';
       if (assignments[i].isWolf) cls += ' break';
       const mark = assignments[i].isWolf ? '🐺 ' : '';
-      const tag = accused.includes(i) ? '（指をさされた）' : '';
+      const tag = accused.includes(i) ? t('pointedTag') : '';
       return '<div class="' + cls + '">' +
         '<span class="ledger-pos"></span>' +
         '<span class="ledger-name">' + mark + escapeHtml(name) + tag + '</span>' +
@@ -1959,7 +2103,7 @@ function wrapCenterText(ctx, text, cx, y, maxWidth, lineHeight) {
 async function shareResult() {
   const btn = document.getElementById('shareResultBtn');
   const originalText = btn.textContent;
-  btn.textContent = '画像を作成中…';
+  btn.textContent = t('shareCreating');
   btn.disabled = true;
 
   try {
@@ -1970,8 +2114,8 @@ async function shareResult() {
     const file = new File([blob], 'ippikiokami-result.png', { type: 'image/png' });
     const shareData = {
       files: [file],
-      title: '一匹狼',
-      text: '「' + currentCategoryLabel + '」で遊んだ結果はこちら！',
+      title: t('shareTitle'),
+      text: t('shareText', currentCategoryLabel),
     };
 
     if (navigator.canShare && navigator.canShare({ files: [file] })) {
@@ -2011,19 +2155,19 @@ function replayAll() {
   const btn = document.getElementById('replayAllBtn');
   if (!replayAllArmed) {
     replayAllArmed = true;
-    btn.textContent = '⚠️ もう一度タップで全部消えます';
+    btn.textContent = t('replayArmed');
     btn.classList.add('armed');
     clearTimeout(replayAllResetTimer);
     replayAllResetTimer = setTimeout(() => {
       replayAllArmed = false;
-      btn.textContent = '最初からやり直す';
+      btn.textContent = STATIC_I18N.replayAllBtn[currentLang] || STATIC_I18N.replayAllBtn.ja;
       btn.classList.remove('armed');
     }, 4000);
     return;
   }
   clearTimeout(replayAllResetTimer);
   replayAllArmed = false;
-  btn.textContent = '最初からやり直す';
+  btn.textContent = STATIC_I18N.replayAllBtn[currentLang] || STATIC_I18N.replayAllBtn.ja;
   btn.classList.remove('armed');
 
   players = [];
@@ -2056,6 +2200,10 @@ document.getElementById('wolfCountPlus').addEventListener('click', () => changeW
 document.getElementById('shareResultBtn').addEventListener('click', shareResult);
 document.getElementById('shareModalClose').addEventListener('click', closeShareModal);
 
+document.getElementById('langToggle').addEventListener('click', () => {
+  setLang(getLang() === 'ja' ? 'en' : 'ja');
+});
+
 document.getElementById('replaySameBtn').addEventListener('click', replaySamePlayers);
 document.getElementById('replayAllBtn').addEventListener('click', replayAll);
 
@@ -2064,6 +2212,7 @@ document.querySelectorAll('.btn-primary, .dice-btn, .add-btn, .cat-tab').forEach
 });
 
 /* ---------------------------- 初期化 ---------------------------- */
+applyLanguage(getLang());
 loadPlayers();
 loadCustomPairs();
 renderPlayerList();

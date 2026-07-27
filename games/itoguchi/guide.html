@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#fdf6ea">
+<title>糸口の遊び方・ルール完全ガイド — よりあい</title>
+<meta name="description" content="協力ならべゲーム「糸口」の遊び方を、準備から結果発表まで丁寧に解説。コツやよくある質問もまとめています。スマホ1台、3人から遊べます。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://chihiro7-28.github.io/yoriai/games/itoguchi/guide.html">
+<meta property="og:title" content="糸口の遊び方・ルール完全ガイド — よりあい">
+<meta property="og:description" content="協力ならべゲーム「糸口」の遊び方を、準備から結果発表まで丁寧に解説。コツやよくある質問もまとめています。スマホ1台、3人から遊べます。">
+<meta property="og:image" content="https://chihiro7-28.github.io/yoriai/games/itoguchi/ogp-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="糸口の遊び方・ルール完全ガイド — よりあい">
+<meta name="twitter:description" content="協力ならべゲーム「糸口」の遊び方を、準備から結果発表まで丁寧に解説。コツやよくある質問もまとめています。スマホ1台、3人から遊べます。">
+<meta name="twitter:image" content="https://chihiro7-28.github.io/yoriai/games/itoguchi/ogp-image.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=IBM+Plex+Mono:wght@400;500;600;700&family=M+PLUS+Rounded+1c:wght@700;800&display=swap');
+
+:root{
+  --ink:#fdf6ea;--ink-2:#fffaf0;--ink-3:#f7ecd6;
+  --paper:#241f18;--paper-dim:#5a5041;--paper-line:rgba(36,31,24,0.14);
+  --gold:#a8761f;--gold-dim:rgba(168,118,31,0.35);
+  --stamp:#d6432c;--stamp-dim:rgba(214,67,44,0.35);
+  --good:#2f8f5b;--muted:rgba(36,31,24,0.6);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{width:100%;min-height:100%;background:var(--ink);}
+body{display:flex;justify-content:center;color:var(--paper);font-family:'IBM Plex Mono',monospace;}
+.app{width:100%;max-width:720px;padding-bottom:60px;}
+.serif{font-family:'Shippori Mincho',serif;}
+a{color:var(--gold);}
+
+.hero{padding:calc(env(safe-area-inset-top,0px) + 34px) 26px 30px;text-align:center;border-bottom:1px solid var(--gold-dim);position:relative;}
+.lang-toggle{
+  position:absolute;top:calc(env(safe-area-inset-top,0px) + 18px);right:22px;
+  background:var(--ink-2);border:1px solid var(--gold-dim);color:var(--gold);
+  font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700;letter-spacing:1px;
+  padding:8px 14px;cursor:pointer;
+}
+.lang-toggle:active{background:rgba(168,118,31,0.12);}
+.back-link{display:inline-block;margin-bottom:20px;font-size:12px;color:var(--muted);text-decoration:underline;}
+.hero-eyebrow{font-size:10px;letter-spacing:4px;color:var(--gold);margin-bottom:10px;}
+.hero h1{font-family:'Shippori Mincho',serif;font-size:clamp(28px,7vw,38px);font-weight:700;margin-bottom:10px;}
+.hero-lead{font-size:13.5px;line-height:1.9;color:var(--paper-dim);max-width:480px;margin:0 auto 20px;}
+.hero-meta{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;}
+.hero-tag{font-size:10.5px;letter-spacing:1px;padding:5px 11px;border:1px solid var(--gold-dim);color:var(--gold);}
+.play-btn{
+  display:inline-block;margin-top:20px;text-decoration:none;
+  background:var(--stamp);color:var(--ink);font-family:'IBM Plex Mono',monospace;
+  font-size:13px;font-weight:700;letter-spacing:1px;padding:14px 30px;
+}
+
+section{padding:38px 26px;border-bottom:1px solid var(--paper-line);}
+section:last-of-type{border-bottom:none;}
+.section-eyebrow{font-size:10px;letter-spacing:4px;color:var(--gold);margin-bottom:10px;}
+.section-title{font-family:'Shippori Mincho',serif;font-size:23px;font-weight:700;margin-bottom:18px;}
+.section-body p{font-size:14px;line-height:1.95;color:var(--paper-dim);margin-bottom:14px;}
+.section-body p:last-child{margin-bottom:0;}
+
+/* 手順ステップ */
+.steps{counter-reset:step;margin-top:8px;}
+.step{position:relative;padding:0 0 26px 44px;}
+.step:last-child{padding-bottom:0;}
+.step::before{
+  counter-increment:step;content:counter(step);
+  position:absolute;left:0;top:0;width:30px;height:30px;
+  background:var(--stamp);color:var(--ink);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:14px;
+}
+.step h3{font-family:'Shippori Mincho',serif;font-size:16.5px;margin-bottom:6px;}
+.step p{font-size:13.5px;line-height:1.85;color:var(--paper-dim);}
+
+/* 例カード */
+.example-card{
+  background:var(--ink-2);border:1px solid var(--paper-line);border-left:3px solid var(--gold);
+  padding:16px 18px;margin-top:16px;font-size:13px;line-height:1.9;color:var(--paper-dim);
+}
+.example-card b{color:var(--paper);}
+
+/* コツ */
+.tip-list{display:flex;flex-direction:column;gap:14px;margin-top:8px;}
+.tip{background:var(--ink-2);border:1px solid var(--paper-line);padding:16px 18px;}
+.tip h3{font-family:'Shippori Mincho',serif;font-size:15px;margin-bottom:6px;color:var(--stamp);}
+.tip p{font-size:13px;line-height:1.85;color:var(--paper-dim);}
+
+/* FAQ */
+.faq{margin-top:8px;}
+.faq-item{border-bottom:1px solid var(--paper-line);padding:18px 0;}
+.faq-item:first-child{padding-top:0;}
+.faq-item:last-child{border-bottom:none;padding-bottom:0;}
+.faq-q{font-family:'Shippori Mincho',serif;font-size:15px;font-weight:700;margin-bottom:8px;display:flex;gap:8px;}
+.faq-q span{color:var(--stamp);flex-shrink:0;}
+.faq-a{font-size:13px;line-height:1.85;color:var(--paper-dim);padding-left:22px;}
+
+.cta{padding:44px 26px;text-align:center;}
+.cta .section-title{margin-bottom:10px;}
+.cta p{font-size:13px;color:var(--muted);margin-bottom:20px;}
+
+.footer{padding:30px 26px calc(env(safe-area-inset-bottom,0px) + 30px);text-align:center;font-size:11px;color:var(--muted);line-height:1.9;}
+
+@media (min-width:640px){
+  .hero h1{font-size:44px;}
+  .section-title{font-size:27px;}
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "糸口の遊び方",
+  "description": "数字は言わずに、たとえ話だけで伝え合う協力ならべゲーム「糸口」の遊び方。",
+  "totalTime": "PT10M",
+  "step": [
+    { "@type": "HowToStep", "name": "参加者を追加する", "text": "スマホを回して遊ぶので、その場にいる3人以上の名前を1台のスマホに入力します。" },
+    { "@type": "HowToStep", "name": "お題を決める", "text": "用意されているお題からサイコロで選ぶか、自分たちで自由にお題を決めることもできます。" },
+    { "@type": "HowToStep", "name": "数字を確認する", "text": "スマホを1人ずつ順番に回し、他の人に見られないよう画面を隠しながら、自分に配られた数字をタップして確認します。" },
+    { "@type": "HowToStep", "name": "たとえ話で伝え合う", "text": "全員が数字を確認したら、順番にお題に沿ったたとえ話を声に出して発表します。数字そのものは言ってはいけません。" },
+    { "@type": "HowToStep", "name": "相談しながら並べる", "text": "発表された内容をもとに、相談しながら全員分のカードを小さい順に並べていきます。" },
+    { "@type": "HowToStep", "name": "結果発表", "text": "並べ終わったら、小さい順に1枚ずつめくっていきます。全員が正しい順番になっていれば成功です。" }
+  ]
+}
+</script>
+</head>
+<body>
+<div class="app">
+
+  <div class="hero">
+    <button class="lang-toggle" id="langToggle" type="button">EN</button>
+    <a class="back-link" href="./" data-i18n="backToGame">← 糸口 トップへ</a>
+    <div class="hero-eyebrow">HOW TO PLAY</div>
+    <h1 data-i18n="pageTitle">糸口の遊び方</h1>
+    <p class="hero-lead" data-i18n="heroLead">
+      数字は言わずに、たとえ話だけで伝え合う協力ならべゲーム「糸口」。
+      準備から結果発表まで、初めての人にも分かるように順番に解説します。
+    </p>
+    <div class="hero-meta">
+      <span class="hero-tag" data-i18n="tag3players">3人〜</span>
+      <span class="hero-tag" data-i18n="tagCoop">協力型</span>
+      <span class="hero-tag" data-i18n="tag10min">約10分</span>
+      <span class="hero-tag" data-i18n="tagOnePhone">スマホ1台</span>
+    </div>
+    <a class="play-btn" href="./" data-i18n="playNow">今すぐ遊ぶ →</a>
+  </div>
+
+  <section>
+    <div class="section-eyebrow">CONCEPT</div>
+    <div class="section-title" data-i18n="conceptTitle">糸口とはどんなゲーム？</div>
+    <div class="section-body">
+      <p data-i18n="conceptP1">
+        参加者全員に、1から100までの中からランダムに1つずつ数字が配られます。ただし、自分の数字は自分にしか見えません。
+        全員がその数字を、共通の「お題」に沿った<b>たとえ話</b>で表現し、会話だけを手がかりに、数字を言わずに小さい順へ並べていくゲームです。
+      </p>
+      <p data-i18n="conceptP2">
+        例えば「辛さレベル」というお題で、自分の数字が大きいと思ったら「激辛カレーくらい」、小さいと思ったら「牛乳くらい」というように、
+        数字ではなく感覚で表現します。この「どう例えるか」に人柄や価値観が出るのが、糸口最大の面白さです。
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-eyebrow">RULES</div>
+    <div class="section-title" data-i18n="rulesTitle">基本ルール</div>
+    <div class="steps">
+      <div class="step">
+        <h3 data-i18n="step1Title">参加者を追加する</h3>
+        <p data-i18n="step1Body">スマホを回して遊ぶので、その場にいる3人以上の名前を1台のスマホに入力します。</p>
+      </div>
+      <div class="step">
+        <h3 data-i18n="step2Title">お題を決める</h3>
+        <p data-i18n="step2Body">用意されているお題からサイコロで選ぶか、自分たちで自由にお題を決めることもできます。「怖さレベル」「高級感」など、なんでも構いません。</p>
+      </div>
+      <div class="step">
+        <h3 data-i18n="step3Title">数字を確認する(受け渡し)</h3>
+        <p data-i18n="step3Body">スマホを1人ずつ順番に回し、他の人に見られないよう画面を隠しながら、自分に配られた数字をタップして確認します。確認したら次の人へ渡します。</p>
+      </div>
+      <div class="step">
+        <h3 data-i18n="step4Title">たとえ話で伝え合う</h3>
+        <p data-i18n="step4Body">全員が数字を確認したら、順番にお題に沿ったたとえ話を声に出して発表します。この時、絶対に数字そのものは言ってはいけません。</p>
+      </div>
+      <div class="step">
+        <h3 data-i18n="step5Title">相談しながら並べる</h3>
+        <p data-i18n="step5Body">発表された内容をもとに、「多分あなたの方が小さいと思う」のように相談しながら、全員分のカードを小さい順に並べていきます。</p>
+      </div>
+      <div class="step">
+        <h3 data-i18n="step6Title">結果発表</h3>
+        <p data-i18n="step6Body">並べ終わったら、小さい順に1枚ずつめくっていきます。全員が正しい順番になっていれば成功です。途中で数字が逆転していたら、そこで失敗が確定します。</p>
+      </div>
+    </div>
+    <div class="example-card" data-i18n="exampleCard">
+      <b>お題「辛さレベル」の会話例</b><br>
+      Aさん「うーん、牛乳くらい」<br>
+      Bさん「私はハバネロくらいかな…」<br>
+      Cさん「私はその中間、カレーライスくらい」<br>
+      → 会話から、A(小) → C(中) → B(大) の順番と予想して並べる、という流れです。
+    </div>
+  </section>
+
+  <section>
+    <div class="section-eyebrow">TIPS</div>
+    <div class="section-title" data-i18n="tipsTitle">上手に遊ぶコツ</div>
+    <div class="tip-list">
+      <div class="tip">
+        <h3 data-i18n="tip1Title">極端な例えを避ける</h3>
+        <p data-i18n="tip1Body">「0点」「100点」のような両極端な例えは、実際の数字とズレやすくなります。少し余裕を持たせた例えの方が、後で調整しやすくなります。</p>
+      </div>
+      <div class="tip">
+        <h3 data-i18n="tip2Title">他の人の発表をよく覚えておく</h3>
+        <p data-i18n="tip2Body">並べ替えは全員の発表が出そろってから行うので、「誰が何と言ったか」を覚えておくと、相談がスムーズになります。</p>
+      </div>
+      <div class="tip">
+        <h3 data-i18n="tip3Title">最初は「やさしい」お題から</h3>
+        <p data-i18n="tip3Body">感覚のズレが大きいお題(抽象的すぎるものなど)は難易度が上がります。初めて遊ぶ時は、日常的で想像しやすいお題を選ぶのがおすすめです。</p>
+      </div>
+      <div class="tip">
+        <h3 data-i18n="tip4Title">番号を忘れたら再確認機能を</h3>
+        <p data-i18n="tip4Body">並べ替え中に自分の数字を忘れてしまっても大丈夫。画面下の「自分の番号を確認する」から、本人確認をした上で安全に再確認できます。</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-eyebrow">FAQ</div>
+    <div class="section-title" data-i18n="faqTitle">よくある質問</div>
+    <div class="faq">
+      <div class="faq-item">
+        <div class="faq-q"><span>Q.</span><span data-i18n="faq1Q">2人でも遊べますか？</span></div>
+        <div class="faq-a" data-i18n="faq1A">A. 最低3人から遊べる設計になっています。会話から絞り込む楽しさを出すため、3人以上をおすすめしています。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>Q.</span><span data-i18n="faq2Q">数字のヒントとして、身振り手振りはOKですか？</span></div>
+        <div class="faq-a" data-i18n="faq2A">A. 明確なルールはありませんが、「言葉での例え」を楽しむゲームなので、数字を直接示すジェスチャーは避けるのがおすすめです。グループ内でルールを決めて遊んでみてください。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>Q.</span><span data-i18n="faq3Q">結果を友達にシェアできますか？</span></div>
+        <div class="faq-a" data-i18n="faq3A">A. できます。結果発表画面の「結果をシェア」から、成功・失敗の結果を画像として保存し、SNSなどに共有できます。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>Q.</span><span data-i18n="faq4Q">自分でお題を追加できますか？</span></div>
+        <div class="faq-a" data-i18n="faq4A">A. できます。ただしネタバレ防止のため、その場で追加したお題は今回のプレイには使われず、次回以降に使えるようになります。</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta">
+    <div class="section-title" data-i18n="ctaTitle">準備はできましたか？</div>
+    <p data-i18n="ctaBody">スマホ1台、3人集まればすぐに始められます。</p>
+    <a class="play-btn" href="./" data-i18n="ctaBtn">糸口を遊ぶ →</a>
+  </div>
+
+  <div class="footer">
+    <a href="./" data-i18n="footerHome">糸口トップへ</a> ・ <a href="../ippikiokami/" data-i18n="footerOther">一匹狼を見る</a> ・ <a href="../../about.html" data-i18n="footerAbout">よりあいについて</a>
+  </div>
+
+</div>
+<script>
+(function () {
+  var LANG_KEY = 'yoriai_lang';
+  var I18N = {
+    backToGame: { ja: '← 糸口 トップへ', en: '← Back to Itoguchi' },
+    pageTitle: { ja: '糸口の遊び方', en: 'How to Play Itoguchi' },
+    heroLead: {
+      ja: '数字は言わずに、たとえ話だけで伝え合う協力ならべゲーム「糸口」。準備から結果発表まで、初めての人にも分かるように順番に解説します。',
+      en: '\u201cItoguchi\u201d is a co-op sorting game where you convey a secret number using only an analogy \u2014 never the number itself. Here\u2019s a step-by-step guide from setup to results, for first-time players.'
+    },
+    tag3players: { ja: '3人〜', en: '3+ players' },
+    tagCoop: { ja: '協力型', en: 'Co-op' },
+    tag10min: { ja: '約10分', en: '~10 min' },
+    tagOnePhone: { ja: 'スマホ1台', en: 'One phone' },
+    playNow: { ja: '今すぐ遊ぶ →', en: 'Play Now →' },
+    conceptTitle: { ja: '糸口とはどんなゲーム？', en: 'What kind of game is Itoguchi?' },
+    conceptP1: {
+      ja: '参加者全員に、1から100までの中からランダムに1つずつ数字が配られます。ただし、自分の数字は自分にしか見えません。全員がその数字を、共通の「お題」に沿った<b>たとえ話</b>で表現し、会話だけを手がかりに、数字を言わずに小さい順へ並べていくゲームです。',
+      en: 'Each player is secretly given a random number from 1 to 100 \u2014 visible only to themselves. Everyone describes their number using an <b>analogy</b> that fits a shared topic, and together, using only conversation as a clue, you line the numbers up from smallest to largest without ever saying them out loud.'
+    },
+    conceptP2: {
+      ja: '例えば「辛さレベル」というお題で、自分の数字が大きいと思ったら「激辛カレーくらい」、小さいと思ったら「牛乳くらい」というように、数字ではなく感覚で表現します。この「どう例えるか」に人柄や価値観が出るのが、糸口最大の面白さです。',
+      en: 'For example, with the topic "spiciness level," if you think your number is high you might say "as spicy as a fiery curry," and if low, "as mild as milk." You express a feeling, not a number. How each person chooses to describe it reveals their personality \u2014 that\u2019s the biggest charm of Itoguchi.'
+    },
+    rulesTitle: { ja: '基本ルール', en: 'Basic Rules' },
+    step1Title: { ja: '参加者を追加する', en: 'Add players' },
+    step1Body: { ja: 'スマホを回して遊ぶので、その場にいる3人以上の名前を1台のスマホに入力します。', en: 'Since you pass one phone around, enter the names of 3 or more people who are physically present.' },
+    step2Title: { ja: 'お題を決める', en: 'Choose a topic' },
+    step2Body: { ja: '用意されているお題からサイコロで選ぶか、自分たちで自由にお題を決めることもできます。「怖さレベル」「高級感」など、なんでも構いません。', en: 'Roll the dice to pick from the built-in topics, or come up with your own \u2014 anything like "scariness level" or "how fancy it feels" works.' },
+    step3Title: { ja: '数字を確認する(受け渡し)', en: 'Check your number (pass the phone)' },
+    step3Body: { ja: 'スマホを1人ずつ順番に回し、他の人に見られないよう画面を隠しながら、自分に配られた数字をタップして確認します。確認したら次の人へ渡します。', en: 'Pass the phone around one person at a time. Hide the screen from others while you tap to reveal your number, then pass it on.' },
+    step4Title: { ja: 'たとえ話で伝え合う', en: 'Share your analogies' },
+    step4Body: { ja: '全員が数字を確認したら、順番にお題に沿ったたとえ話を声に出して発表します。この時、絶対に数字そのものは言ってはいけません。', en: 'Once everyone has checked their number, take turns saying an analogy out loud that fits the topic. Never say the number itself.' },
+    step5Title: { ja: '相談しながら並べる', en: 'Sort them together' },
+    step5Body: { ja: '発表された内容をもとに、「多分あなたの方が小さいと思う」のように相談しながら、全員分のカードを小さい順に並べていきます。', en: 'Based on what everyone said, discuss and arrange all the cards from smallest to largest \u2014 e.g. "I think yours is probably smaller than mine."' },
+    step6Title: { ja: '結果発表', en: 'Reveal the results' },
+    step6Body: { ja: '並べ終わったら、小さい順に1枚ずつめくっていきます。全員が正しい順番になっていれば成功です。途中で数字が逆転していたら、そこで失敗が確定します。', en: 'Once sorted, flip the cards over one by one starting from smallest. If everyone\u2019s in the correct order, you win. If the numbers go out of order anywhere, that\u2019s a loss.' },
+    exampleCard: {
+      ja: '<b>お題「辛さレベル」の会話例</b><br>Aさん「うーん、牛乳くらい」<br>Bさん「私はハバネロくらいかな…」<br>Cさん「私はその中間、カレーライスくらい」<br>→ 会話から、A(小) → C(中) → B(大) の順番と予想して並べる、という流れです。',
+      en: '<b>Example conversation for the topic "spiciness level"</b><br>A: "Hmm, about as mild as milk."<br>B: "Mine\u2019s more like a habanero, maybe\u2026"<br>C: "I\u2019m somewhere in between \u2014 like curry rice."<br>\u2192 From this, you\u2019d guess the order A (low) \u2192 C (mid) \u2192 B (high) and sort accordingly.'
+    },
+    tipsTitle: { ja: '上手に遊ぶコツ', en: 'Tips for Playing Well' },
+    tip1Title: { ja: '極端な例えを避ける', en: 'Avoid extreme comparisons' },
+    tip1Body: { ja: '「0点」「100点」のような両極端な例えは、実際の数字とズレやすくなります。少し余裕を持たせた例えの方が、後で調整しやすくなります。', en: 'Extremes like "zero points" or "a perfect hundred" tend to drift from the real number. Leaving a bit of room in your analogy makes it easier to adjust later.' },
+    tip2Title: { ja: '他の人の発表をよく覚えておく', en: 'Remember what others say' },
+    tip2Body: { ja: '並べ替えは全員の発表が出そろってから行うので、「誰が何と言ったか」を覚えておくと、相談がスムーズになります。', en: 'Sorting happens after everyone has spoken, so remembering who said what makes the discussion much smoother.' },
+    tip3Title: { ja: '最初は「やさしい」お題から', en: 'Start with "easy" topics' },
+    tip3Body: { ja: '感覚のズレが大きいお題(抽象的すぎるものなど)は難易度が上がります。初めて遊ぶ時は、日常的で想像しやすいお題を選ぶのがおすすめです。', en: 'Topics prone to wide perception gaps (overly abstract ones) raise the difficulty. For your first game, pick something everyday and easy to picture.' },
+    tip4Title: { ja: '番号を忘れたら再確認機能を', en: 'Forgot your number? Check it again' },
+    tip4Body: { ja: '並べ替え中に自分の数字を忘れてしまっても大丈夫。画面下の「自分の番号を確認する」から、本人確認をした上で安全に再確認できます。', en: 'It\u2019s fine if you forget your number mid-sort. Use "Check My Number" at the bottom of the screen to safely re-check it after confirming your identity.' },
+    faqTitle: { ja: 'よくある質問', en: 'Frequently Asked Questions' },
+    faq1Q: { ja: '2人でも遊べますか？', en: 'Can it be played with 2 people?' },
+    faq1A: { ja: 'A. 最低3人から遊べる設計になっています。会話から絞り込む楽しさを出すため、3人以上をおすすめしています。', en: 'A. It\u2019s designed for a minimum of 3 players, so the fun of narrowing things down through conversation really comes through.' },
+    faq2Q: { ja: '数字のヒントとして、身振り手振りはOKですか？', en: 'Can I use gestures as a hint for my number?' },
+    faq2A: { ja: 'A. 明確なルールはありませんが、「言葉での例え」を楽しむゲームなので、数字を直接示すジェスチャーは避けるのがおすすめです。グループ内でルールを決めて遊んでみてください。', en: 'A. There\u2019s no strict rule, but since the game is about enjoying verbal analogies, it\u2019s best to avoid gestures that directly indicate the number. Feel free to agree on house rules with your group.' },
+    faq3Q: { ja: '結果を友達にシェアできますか？', en: 'Can I share the result with friends?' },
+    faq3A: { ja: 'A. できます。結果発表画面の「結果をシェア」から、成功・失敗の結果を画像として保存し、SNSなどに共有できます。', en: 'A. Yes. Use "Share Result" on the results screen to save your win or loss as an image and share it on social media.' },
+    faq4Q: { ja: '自分でお題を追加できますか？', en: 'Can I add my own topics?' },
+    faq4A: { ja: 'A. できます。ただしネタバレ防止のため、その場で追加したお題は今回のプレイには使われず、次回以降に使えるようになります。', en: 'A. Yes. To prevent spoilers, topics added during a session aren\u2019t used in that same round \u2014 they become available starting next time.' },
+    ctaTitle: { ja: '準備はできましたか？', en: 'Ready to play?' },
+    ctaBody: { ja: 'スマホ1台、3人集まればすぐに始められます。', en: 'One phone, three people \u2014 that\u2019s all you need to start.' },
+    ctaBtn: { ja: '糸口を遊ぶ →', en: 'Play Itoguchi →' },
+    footerHome: { ja: '糸口トップへ', en: 'Itoguchi Home' },
+    footerOther: { ja: '一匹狼を見る', en: 'See Ippikiokami' },
+    footerAbout: { ja: 'よりあいについて', en: 'About Yoriai' }
+  };
+
+  function getLang() {
+    try { return localStorage.getItem(LANG_KEY) || 'ja'; } catch (e) { return 'ja'; }
+  }
+  function applyLanguage(lang) {
+    document.documentElement.lang = lang;
+    document.querySelectorAll('[data-i18n]').forEach(function (el) {
+      var entry = I18N[el.getAttribute('data-i18n')];
+      if (entry) el.innerHTML = entry[lang] || entry.ja;
+    });
+    var toggle = document.getElementById('langToggle');
+    if (toggle) toggle.textContent = lang === 'ja' ? 'EN' : '日本語';
+  }
+  function setLang(lang) {
+    try { localStorage.setItem(LANG_KEY, lang); } catch (e) {}
+    applyLanguage(lang);
+  }
+  document.getElementById('langToggle').addEventListener('click', function () {
+    setLang(getLang() === 'ja' ? 'en' : 'ja');
+  });
+  applyLanguage(getLang());
+})();
+</script>
+</body>
+</html>

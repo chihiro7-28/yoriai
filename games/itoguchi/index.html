@@ -454,6 +454,13 @@ html.lang-en .splash-caption{display:block;}
   display:flex;flex-direction:column;align-items:center;gap:20px;
   padding:40px;text-align:center;width:100%;
 }
+.lang-toggle{
+  position:absolute;top:calc(env(safe-area-inset-top,0px) + 18px);right:22px;
+  background:var(--ink-2);border:1px solid var(--gold-dim);color:var(--gold);
+  font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700;letter-spacing:1px;
+  padding:8px 14px;cursor:pointer;z-index:3;
+}
+.lang-toggle:active{background:rgba(168,118,31,0.12);}
 .title-badge{
   display:flex;gap:10px;margin-bottom:4px;
 }
@@ -486,6 +493,23 @@ html.lang-en .splash-caption{display:block;}
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="manifest.json">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Game",
+  "name": "糸口",
+  "alternateName": "Itoguchi",
+  "url": "https://chihiro7-28.github.io/yoriai/games/itoguchi/",
+  "description": "数字は言わずに、たとえ話だけで伝え合う協力ならべゲーム。スマホ1台、3人から遊べます。",
+  "genre": "パーティーゲーム",
+  "playMode": "MultiPlayer",
+  "numberOfPlayers": { "@type": "QuantitativeValue", "minValue": 3 },
+  "applicationCategory": "GameApplication",
+  "operatingSystem": "Any (Web Browser)",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "JPY" },
+  "isPartOf": { "@type": "WebSite", "name": "よりあい", "url": "https://chihiro7-28.github.io/yoriai/" }
+}
+</script>
 </head>
 <body>
 <div class="splash" id="splash">
@@ -502,7 +526,8 @@ html.lang-en .splash-caption{display:block;}
 <!-- ===== スタート画面 ===== -->
 <div id="title" class="screen active">
   <div class="title-inner fade">
-    <a href="../../" class="btn-plain" style="margin-bottom:6px;">← ゲーム一覧へ</a>
+    <button class="lang-toggle" id="langToggle" type="button">EN</button>
+    <a href="../../" class="btn-plain" style="margin-bottom:6px;" data-i18n="backToHub">← ゲーム一覧へ</a>
     <div class="title-badge">
       <div class="title-badge-dot d1"></div>
       <div class="title-badge-dot d2"></div>
@@ -510,8 +535,9 @@ html.lang-en .splash-caption{display:block;}
     </div>
     <div class="title-main">糸口</div>
     <div class="title-caption">ITOGUCHI</div>
-    <div class="title-sub">数字は言わずに、みんなで力を合わせて<br>小さい順に並べよう</div>
-    <button class="btn btn-primary" id="titleStartBtn" style="max-width:260px;">ゲームスタート →</button>
+    <div class="title-sub" data-i18n="titleSub">数字は言わずに、みんなで力を合わせて<br>小さい順に並べよう</div>
+    <button class="btn btn-primary" id="titleStartBtn" style="max-width:260px;" data-i18n="titleStart">ゲームスタート →</button>
+    <a href="guide.html" class="btn-plain" style="margin-top:14px;" data-i18n="titleGuide">📖 遊び方をくわしく見る</a>
   </div>
 </div>
 
@@ -519,20 +545,20 @@ html.lang-en .splash-caption{display:block;}
 <div id="setup" class="screen">
   <div class="file-header">
     <div class="file-tag serif">糸口</div>
-    <div class="file-no">協力ならべゲーム</div>
+    <div class="file-no" data-i18n="setupSubtitle">協力ならべゲーム</div>
   </div>
   <div class="scroll-body">
     <div class="section-title">MEMBERS</div>
     <div class="player-row">
-      <input class="player-input" id="playerInput" type="text" placeholder="名前を入力" maxlength="10" autocomplete="off">
+      <input class="player-input" id="playerInput" type="text" placeholder="名前を入力" data-i18n-placeholder="playerInputPh" maxlength="10" autocomplete="off">
       <button class="add-btn" id="addPlayerBtn">＋</button>
     </div>
     <div class="player-list" id="playerList"></div>
 
-    <div class="section-title">お題を決める</div>
-    <button class="dice-btn" id="diceBtn">🎲 お題を決める(押すたびに変わります)</button>
+    <div class="section-title" data-i18n="themeSectionTitle">お題を決める</div>
+    <button class="dice-btn" id="diceBtn" data-i18n="diceBtn">🎲 お題を決める(押すたびに変わります)</button>
     <div class="custom-add-row">
-      <input class="player-input" id="customThemeInput" type="text" placeholder="思いついたお題を手入力" maxlength="40" autocomplete="off">
+      <input class="player-input" id="customThemeInput" type="text" placeholder="思いついたお題を手入力" data-i18n-placeholder="customThemeInputPh" maxlength="40" autocomplete="off">
       <button class="add-btn" id="addThemeBtn">＋</button>
     </div>
     <div class="theme-list" id="customThemeList"></div>
@@ -540,7 +566,7 @@ html.lang-en .splash-caption{display:block;}
     <div id="selectedThemeBanner" class="selected-theme-banner" style="display:none;"></div>
   </div>
   <div class="footer-area">
-    <button class="btn btn-primary" id="startBtn" disabled>この内容で開始 →</button>
+    <button class="btn btn-primary" id="startBtn" disabled data-i18n="startBtn">この内容で開始 →</button>
   </div>
 </div>
 
@@ -550,8 +576,8 @@ html.lang-en .splash-caption{display:block;}
     <div class="handoff-eyebrow">HAND THE PHONE TO</div>
     <div class="handoff-name serif" id="handoffName">—</div>
     <div class="handoff-progress" id="handoffProgress">1 / 6</div>
-    <div class="handoff-msg">他の人に画面を見られないように<br>渡してください</div>
-    <button class="btn btn-primary" id="handoffOpenBtn" style="max-width:240px;">受け取った。カードを見る →</button>
+    <div class="handoff-msg" data-i18n="handoffMsg">他の人に画面を見られないように<br>渡してください</div>
+    <button class="btn btn-primary" id="handoffOpenBtn" style="max-width:240px;" data-i18n="handoffOpenBtn">受け取った。カードを見る →</button>
   </div>
 </div>
 
@@ -565,7 +591,7 @@ html.lang-en .splash-caption{display:block;}
           <div class="card-back-pattern">
             <div class="card-back-logo">糸口</div>
           </div>
-          <div class="card-hint" id="cardHint">タップしてめくる</div>
+          <div class="card-hint" id="cardHint" data-i18n="cardHint">タップしてめくる</div>
         </div>
         <div class="card-face card-front">
           <div class="card-corner tl" id="cornerNumTL">--</div>
@@ -578,8 +604,8 @@ html.lang-en .splash-caption{display:block;}
         </div>
       </div>
     </div>
-    <div class="handoff-msg">数字は他の人に見せないでください</div>
-    <button class="btn btn-primary" id="revealNextBtn" style="max-width:240px;display:none;">伏せて次の人へ渡す →</button>
+    <div class="handoff-msg" data-i18n="revealMsg">数字は他の人に見せないでください</div>
+    <button class="btn btn-primary" id="revealNextBtn" style="max-width:240px;display:none;" data-i18n="revealNextBtn">伏せて次の人へ渡す →</button>
   </div>
 </div>
 
@@ -587,30 +613,30 @@ html.lang-en .splash-caption{display:block;}
 <div id="discuss" class="screen">
   <div class="discuss-eyebrow">THEME</div>
   <div class="discuss-theme serif" id="discussTheme">—</div>
-  <div class="discuss-rule">
+  <div class="discuss-rule" data-i18n="discussRule">
     自分の数字は明かさずに、お題に沿った<br>
     たとえ話・ヒントを声に出して伝え合おう。<br>
     全員が話し終えたら、次へ進もう。
   </div>
-  <button class="btn btn-primary" id="toOrderingBtn" style="max-width:260px;">並べ替えへ進む →</button>
+  <button class="btn btn-primary" id="toOrderingBtn" style="max-width:260px;" data-i18n="toOrderingBtn">並べ替えへ進む →</button>
 </div>
 
 <!-- ===== 並べ替え画面 ===== -->
 <div id="ordering" class="screen">
   <div class="file-header">
     <div class="file-tag serif">SEQUENCE</div>
-    <div class="file-no">小さい順に並べよう</div>
+    <div class="file-no" data-i18n="orderingSubtitle">小さい順に並べよう</div>
   </div>
   <div class="ordering-theme-banner" id="orderingThemeBanner">お題:「—」</div>
   <div class="scroll-body">
-    <div class="section-title">未配置</div>
+    <div class="section-title" data-i18n="poolLabel">未配置</div>
     <div class="order-pool" id="orderPool"></div>
-    <div class="section-title">並び(小さい ← → 大きい)</div>
+    <div class="section-title" data-i18n="slotsLabel">並び(小さい ← → 大きい)</div>
     <div class="order-slots" id="orderSlots"></div>
   </div>
   <div class="footer-area" style="display:flex;flex-direction:column;gap:10px;">
-    <button class="btn btn-ghost" id="checkNumberBtn">🔍 自分の番号を確認する</button>
-    <button class="btn btn-primary" id="confirmOrderBtn" disabled>この並びで確定 →</button>
+    <button class="btn btn-ghost" id="checkNumberBtn" data-i18n="checkNumberBtn">🔍 自分の番号を確認する</button>
+    <button class="btn btn-primary" id="confirmOrderBtn" disabled data-i18n="confirmOrderBtn">この並びで確定 →</button>
   </div>
 </div>
 
@@ -619,18 +645,18 @@ html.lang-en .splash-caption{display:block;}
   <div class="share-modal-inner fade">
 
     <div class="check-step active" id="checkStepSelect">
-      <div class="handoff-eyebrow">番号を確認する</div>
-      <div class="handoff-msg">他の人に見られないように、画面を隠してから<br>自分の名前を選んでください</div>
+      <div class="handoff-eyebrow" data-i18n="checkTitle">番号を確認する</div>
+      <div class="handoff-msg" data-i18n="checkSelectMsg">他の人に見られないように、画面を隠してから<br>自分の名前を選んでください</div>
       <div class="check-name-list" id="checkNameList"></div>
-      <button class="btn btn-plain" id="checkCancelBtn1">閉じる</button>
+      <button class="btn btn-plain" id="checkCancelBtn1" data-i18n="closeBtn">閉じる</button>
     </div>
 
     <div class="check-step" id="checkStepConfirm">
-      <div class="handoff-eyebrow">本人確認</div>
+      <div class="handoff-eyebrow" data-i18n="checkConfirmTitle">本人確認</div>
       <div class="handoff-name serif" id="checkConfirmName">—</div>
-      <div class="handoff-msg">さんで間違いないですか？<br>他の人の番号を見てしまわないよう、<br>必ず本人か確認してください</div>
-      <button class="btn btn-primary" id="checkConfirmYesBtn" style="max-width:240px;">はい、自分です →</button>
-      <button class="btn btn-plain" id="checkConfirmNoBtn">ちがう、選び直す</button>
+      <div class="handoff-msg" data-i18n="checkConfirmMsg">さんで間違いないですか？<br>他の人の番号を見てしまわないよう、<br>必ず本人か確認してください</div>
+      <button class="btn btn-primary" id="checkConfirmYesBtn" style="max-width:240px;" data-i18n="checkConfirmYes">はい、自分です →</button>
+      <button class="btn btn-plain" id="checkConfirmNoBtn" data-i18n="checkConfirmNo">ちがう、選び直す</button>
     </div>
 
     <div class="check-step" id="checkStepReveal">
@@ -638,8 +664,8 @@ html.lang-en .splash-caption{display:block;}
       <div class="check-number-panel">
         <div class="card-number" id="checkRevealNumber">--</div>
       </div>
-      <div class="handoff-msg">確認したら、他の人に見られないように<br>すぐ閉じてください</div>
-      <button class="btn btn-primary" id="checkCloseBtn" style="max-width:240px;">閉じる</button>
+      <div class="handoff-msg" data-i18n="checkRevealMsg">確認したら、他の人に見られないように<br>すぐ閉じてください</div>
+      <button class="btn btn-primary" id="checkCloseBtn" style="max-width:240px;" data-i18n="closeBtn">閉じる</button>
     </div>
 
   </div>
@@ -655,23 +681,23 @@ html.lang-en .splash-caption{display:block;}
     <!-- ===== 広告枠(ラウンド間) =====
          AdSense等の審査が通ったら、この中にins.adsbygoogleタグを入れる想定。
          今はプレースホルダーのみ表示。 -->
-    <div class="ad-slot" id="adSlot">広告スペース</div>
+    <div class="ad-slot" id="adSlot" data-i18n="adSlot">広告スペース</div>
   </div>
   <div class="footer-area" style="display:flex;flex-direction:column;gap:10px;">
-    <button class="btn btn-ghost" id="shareResultBtn" style="display:none;">📤 結果をシェア</button>
-    <button class="btn btn-primary" id="replaySameBtn">同じメンバーでもう一度 →</button>
-    <button class="btn btn-plain" id="replayAllBtn">最初からやり直す</button>
+    <button class="btn btn-ghost" id="shareResultBtn" style="display:none;" data-i18n="shareResultBtn">📤 結果をシェア</button>
+    <button class="btn btn-primary" id="replaySameBtn" data-i18n="replaySameBtn">同じメンバーでもう一度 →</button>
+    <button class="btn btn-plain" id="replayAllBtn" data-i18n="replayAllBtn">最初からやり直す</button>
   </div>
 </div>
 
 <!-- ===== 結果シェア用モーダル(Web Share非対応ブラウザのフォールバック) ===== -->
 <div class="share-modal" id="shareModal">
   <div class="share-modal-inner fade">
-    <img class="share-modal-img" id="shareModalImg" alt="結果画像のプレビュー">
-    <div class="share-modal-hint">画像を長押しで保存、またはリンクからダウンロードしてね</div>
+    <img class="share-modal-img" id="shareModalImg" alt="結果画像のプレビュー" data-i18n-alt="shareModalAlt">
+    <div class="share-modal-hint" data-i18n="shareModalHint">画像を長押しで保存、またはリンクからダウンロードしてね</div>
     <div class="share-modal-actions">
-      <a class="btn btn-ghost" id="shareModalDownload" download="itoguchi-result.png">保存する</a>
-      <button class="btn btn-plain" id="shareModalClose" style="flex:1;">閉じる</button>
+      <a class="btn btn-ghost" id="shareModalDownload" download="itoguchi-result.png" data-i18n="shareModalDownload">保存する</a>
+      <button class="btn btn-plain" id="shareModalClose" style="flex:1;" data-i18n="closeBtn">閉じる</button>
     </div>
   </div>
 </div>
@@ -687,14 +713,113 @@ html.lang-en .splash-caption{display:block;}
    → ③相談しながら小さい順に並べる → ④答え合わせ、という流れ。
    ========================================================================== */
 
-// ホーム画面などで選ばれた言語設定を読み取って反映する(本格対応は後続で追加)
-(function () {
-  try {
-    if (localStorage.getItem('yoriai_lang') === 'en') {
-      document.documentElement.classList.add('lang-en');
-    }
-  } catch (e) {}
-})();
+/* ============================================================
+   英語対応(ページ内切り替え・localStorageで言語設定を共有)
+   ============================================================ */
+const LANG_KEY = 'yoriai_lang';
+let currentLang = 'ja';
+
+const STATIC_I18N = {
+  backToHub: { ja: '← ゲーム一覧へ', en: '← All Games' },
+  titleSub: { ja: '数字は言わずに、みんなで力を合わせて<br>小さい順に並べよう', en: 'Convey your number without saying it —<br>work together to line up smallest to largest.' },
+  titleStart: { ja: 'ゲームスタート →', en: 'Start Game →' },
+  titleGuide: { ja: '📖 遊び方をくわしく見る', en: '📖 How to Play' },
+  setupSubtitle: { ja: '協力ならべゲーム', en: 'Co-op Sorting Game' },
+  themeSectionTitle: { ja: 'お題を決める', en: 'Choose a Topic' },
+  diceBtn: { ja: '🎲 お題を決める(押すたびに変わります)', en: '🎲 Roll a Topic (tap again to reroll)' },
+  startBtn: { ja: 'この内容で開始 →', en: 'Start with This Setup →' },
+  handoffMsg: { ja: '他の人に画面を見られないように<br>渡してください', en: 'Pass the phone without<br>letting anyone else see the screen.' },
+  handoffOpenBtn: { ja: '受け取った。カードを見る →', en: 'Got it. Reveal My Card →' },
+  cardHint: { ja: 'タップしてめくる', en: 'Tap to reveal' },
+  revealMsg: { ja: '数字は他の人に見せないでください', en: "Don't let anyone else see your number." },
+  revealNextBtn: { ja: '伏せて次の人へ渡す →', en: 'Hide It & Pass to Next →' },
+  discussRule: {
+    ja: '自分の数字は明かさずに、お題に沿った<br>たとえ話・ヒントを声に出して伝え合おう。<br>全員が話し終えたら、次へ進もう。',
+    en: "Without revealing your number, describe it out loud<br>using an analogy that fits the topic.<br>Move on once everyone has spoken."
+  },
+  toOrderingBtn: { ja: '並べ替えへ進む →', en: 'Move to Sorting →' },
+  orderingSubtitle: { ja: '小さい順に並べよう', en: 'Line up smallest to largest' },
+  poolLabel: { ja: '未配置', en: 'Unplaced' },
+  slotsLabel: { ja: '並び(小さい ← → 大きい)', en: 'Order (small ← → large)' },
+  checkNumberBtn: { ja: '🔍 自分の番号を確認する', en: '🔍 Check My Number' },
+  confirmOrderBtn: { ja: 'この並びで確定 →', en: 'Confirm This Order →' },
+  checkTitle: { ja: '番号を確認する', en: 'Check Your Number' },
+  checkSelectMsg: { ja: '他の人に見られないように、画面を隠してから<br>自分の名前を選んでください', en: 'Hide the screen from others,<br>then select your own name.' },
+  closeBtn: { ja: '閉じる', en: 'Close' },
+  checkConfirmTitle: { ja: '本人確認', en: 'Confirm Identity' },
+  checkConfirmMsg: { ja: 'さんで間違いないですか？<br>他の人の番号を見てしまわないよう、<br>必ず本人か確認してください', en: 'Is that really you?<br>Please double-check before continuing,<br>so no one sees someone else\u2019s number.' },
+  checkConfirmYes: { ja: 'はい、自分です →', en: "Yes, that's me →" },
+  checkConfirmNo: { ja: 'ちがう、選び直す', en: 'No, pick again' },
+  checkRevealMsg: { ja: '確認したら、他の人に見られないように<br>すぐ閉じてください', en: 'Once you\u2019ve checked it, close this<br>right away so others can\u2019t see.' },
+  shareResultBtn: { ja: '📤 結果をシェア', en: '📤 Share Result' },
+  replaySameBtn: { ja: '同じメンバーでもう一度 →', en: 'Replay with Same Players →' },
+  replayAllBtn: { ja: '最初からやり直す', en: 'Start Over' },
+  adSlot: { ja: '広告スペース', en: 'Ad space' },
+  shareModalAlt: { ja: '結果画像のプレビュー', en: 'Result image preview' },
+  shareModalHint: { ja: '画像を長押しで保存、またはリンクからダウンロードしてね', en: 'Long-press the image to save, or use the download link.' },
+  shareModalDownload: { ja: '保存する', en: 'Save' },
+  playerInputPh: { ja: '名前を入力', en: 'Enter a name' },
+  customThemeInputPh: { ja: '思いついたお題を手入力', en: 'Type your own topic' }
+};
+
+const T = {
+  emptyPlayerList: { ja: n => 'まだ誰も追加されていません。最低' + n + '人必要です。', en: n => 'No one added yet. At least ' + n + ' players are needed.' },
+  maxPlayersAlert: { ja: '一度に遊べるのは20人までです', en: 'Up to 20 players can play at once.' },
+  themeSelectedBanner: { ja: name => '今回のお題: <b>「' + name + '」</b>', en: name => 'This round\u2019s topic: <b>\u201c' + name + '\u201d</b>' },
+  revealThemeEcho: { ja: name => 'お題:「' + name + '」', en: name => 'Topic: \u201c' + name + '\u201d' },
+  orderingThemeBanner: { ja: name => 'お題: <b>「' + name + '」</b>', en: name => 'Topic: <b>\u201c' + name + '\u201d</b>' },
+  poolAllPlaced: { ja: '全員配置しました。下の並びを確認してください。', en: 'Everyone is placed. Check the order below.' },
+  slotsEmpty: { ja: '上のカードをタップして、小さいと思う順に並べていこう', en: 'Tap the cards above and place them from smallest to largest.' },
+  resultSubStart: { ja: '小さいと思う順に、1枚ずつタップして開けよう', en: 'Tap the cards one by one, starting with the one you think is smallest.' },
+  resultSubBroke: { ja: '⚠️ ここで順番が崩れていました…続きも開けてみよう', en: "\u26a0\ufe0f The order broke here\u2026 keep opening the rest." },
+  resultSubNext: { ja: '次のカードをタップして開けよう', en: 'Tap the next card to reveal it.' },
+  verdictSuccess: { ja: 'せいこう！<span class="result-verdict-en">PERFECT ORDER</span>', en: 'Success!<span class="result-verdict-en">PERFECT ORDER</span>' },
+  verdictFail: { ja: 'ざんねん…<span class="result-verdict-en">ORDER BROKEN</span>', en: 'Not quite\u2026<span class="result-verdict-en">ORDER BROKEN</span>' },
+  resultSubSuccess: { ja: '全員の数字が正しく昇順に並びました', en: "Everyone's numbers were placed in the correct order." },
+  resultSubFail: { ja: n => n + '箇所、順番が崩れていました', en: n => 'The order broke in ' + n + ' place' + (n === 1 ? '' : 's') + '.' },
+  shareCreating: { ja: '画像を作成中…', en: 'Creating image\u2026' },
+  replayArmed: { ja: '⚠️ もう一度タップで全部消えます', en: '⚠️ Tap again to erase everything' }
+};
+
+function t(key, ...args) {
+  const entry = T[key];
+  if (!entry) return key;
+  const val = entry[currentLang] || entry.ja;
+  return typeof val === 'function' ? val(...args) : val;
+}
+
+function getLang() {
+  try { return localStorage.getItem(LANG_KEY) || 'ja'; } catch (e) { return 'ja'; }
+}
+
+function applyLanguage(lang) {
+  currentLang = lang;
+  document.documentElement.lang = lang;
+  document.documentElement.classList.toggle('lang-en', lang === 'en');
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const entry = STATIC_I18N[el.getAttribute('data-i18n')];
+    if (entry) el.innerHTML = entry[lang] || entry.ja;
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const entry = STATIC_I18N[el.getAttribute('data-i18n-placeholder')];
+    if (entry) el.placeholder = entry[lang] || entry.ja;
+  });
+  document.querySelectorAll('[data-i18n-alt]').forEach(el => {
+    const entry = STATIC_I18N[el.getAttribute('data-i18n-alt')];
+    if (entry) el.alt = entry[lang] || entry.ja;
+  });
+  const toggle = document.getElementById('langToggle');
+  if (toggle) toggle.textContent = lang === 'ja' ? 'EN' : '日本語';
+}
+
+function setLang(lang) {
+  try { localStorage.setItem(LANG_KEY, lang); } catch (e) {}
+  applyLanguage(lang);
+  // 言語切替時、既に画面に出ている動的な文言も作り直す
+  if (typeof renderPlayerList === 'function') renderPlayerList();
+  if (typeof renderCustomThemeList === 'function') renderCustomThemeList();
+  if (typeof updateSelectedThemeBanner === 'function') updateSelectedThemeBanner();
+}
 
 const NUMBER_MIN = 1;
 const NUMBER_MAX = 100;
@@ -1289,7 +1414,7 @@ function showScreen(id) {
 function renderPlayerList() {
   const list = document.getElementById('playerList');
   if (!players.length) {
-    list.innerHTML = '<div class="player-empty">まだ誰も追加されていません。最低' + MIN_PLAYERS + '人必要です。</div>';
+    list.innerHTML = '<div class="player-empty">' + t('emptyPlayerList', MIN_PLAYERS) + '</div>';
   } else {
     list.innerHTML = players.map((name, i) =>
       '<div class="player-chip"><span><span class="num">' + String(i + 1).padStart(2, '0') + '</span>' + escapeHtml(name) + '</span><span class="del" data-i="' + i + '">✕</span></div>'
@@ -1309,7 +1434,7 @@ function addPlayer() {
   const input = document.getElementById('playerInput');
   const name = input.value.trim();
   if (!name) { input.focus(); return; }
-  if (players.length >= 20) { alert('一度に遊べるのは20人までです'); return; }
+  if (players.length >= 20) { alert(t('maxPlayersAlert')); return; }
   players.push(name);
   savePlayers();
   input.value = '';
@@ -1367,7 +1492,7 @@ function updateSelectedThemeBanner() {
   const banner = document.getElementById('selectedThemeBanner');
   if (selectedTheme) {
     banner.style.display = 'block';
-    banner.innerHTML = '今回のお題: <b>「' + escapeHtml(selectedTheme) + '」</b>';
+    banner.innerHTML = t('themeSelectedBanner', escapeHtml(selectedTheme));
   } else {
     banner.style.display = 'none';
   }
@@ -1449,14 +1574,14 @@ function openReveal() {
   document.getElementById('revealNumber').textContent = p.number;
   document.getElementById('cornerNumTL').textContent = p.number;
   document.getElementById('cornerNumBR').textContent = p.number;
-  document.getElementById('revealThemeEcho').textContent = 'お題:「' + selectedTheme + '」';
+  document.getElementById('revealThemeEcho').textContent = t('revealThemeEcho', selectedTheme);
 
   const card = document.getElementById('revealCard');
   card.style.transition = 'none';
   card.classList.remove('flipped');
   void card.offsetWidth; // 即座にリセットしたことを反映させてから通常のtransitionへ戻す
   card.style.transition = '';
-  document.getElementById('cardHint').textContent = 'タップしてめくる';
+  document.getElementById('cardHint').textContent = t('cardHint');
   document.getElementById('revealNextBtn').style.display = 'none';
   showScreen('reveal');
 }
@@ -1503,7 +1628,7 @@ function goOrdering() {
     [orderPool[i], orderPool[j]] = [orderPool[j], orderPool[i]];
   }
   orderPlaced = [];
-  document.getElementById('orderingThemeBanner').innerHTML = 'お題: <b>「' + escapeHtml(selectedTheme || '') + '」</b>';
+  document.getElementById('orderingThemeBanner').innerHTML = t('orderingThemeBanner', escapeHtml(selectedTheme || ''));
   renderOrdering();
   showScreen('ordering');
 }
@@ -1511,7 +1636,7 @@ function goOrdering() {
 function renderOrdering() {
   const poolEl = document.getElementById('orderPool');
   if (!orderPool.length) {
-    poolEl.innerHTML = '<div class="player-empty">全員配置しました。下の並びを確認してください。</div>';
+    poolEl.innerHTML = '<div class="player-empty">' + t('poolAllPlaced') + '</div>';
   } else {
     poolEl.innerHTML = orderPool.map(idx =>
       '<div class="order-chip" data-idx="' + idx + '">' + escapeHtml(assignments[idx].name) + '</div>'
@@ -1523,7 +1648,7 @@ function renderOrdering() {
 
   const slotsEl = document.getElementById('orderSlots');
   if (!orderPlaced.length) {
-    slotsEl.innerHTML = '<div class="order-slot-empty">上のカードをタップして、小さいと思う順に並べていこう</div>';
+    slotsEl.innerHTML = '<div class="order-slot-empty">' + t('slotsEmpty') + '</div>';
   } else {
     slotsEl.innerHTML = orderPlaced.map((idx, pos) =>
       '<div class="order-slot" data-pos="' + pos + '">' +
@@ -1651,7 +1776,7 @@ function confirmOrder() {
   resultRevealedCount = 0;
   resultBreaks = [];
   document.getElementById('resultVerdict').style.display = 'none';
-  document.getElementById('resultSub').textContent = '小さいと思う順に、1枚ずつタップして開けよう';
+  document.getElementById('resultSub').textContent = t('resultSubStart');
   document.getElementById('shareResultBtn').style.display = 'none';
   renderResultLedger();
   showScreen('result');
@@ -1716,8 +1841,8 @@ function revealResultCard(pos) {
     finishResult();
   } else {
     document.getElementById('resultSub').textContent = brokeHere
-      ? '⚠️ ここで順番が崩れていました…続きも開けてみよう'
-      : '次のカードをタップして開けよう';
+      ? t('resultSubBroke')
+      : t('resultSubNext');
   }
 }
 
@@ -1726,13 +1851,11 @@ function finishResult() {
   const sub = document.getElementById('resultSub');
   const success = resultBreaks.length === 0;
   verdict.style.display = 'block';
-  verdict.innerHTML = success
-    ? 'せいこう！<span class="result-verdict-en">PERFECT ORDER</span>'
-    : 'ざんねん…<span class="result-verdict-en">ORDER BROKEN</span>';
+  verdict.innerHTML = success ? t('verdictSuccess') : t('verdictFail');
   verdict.className = 'result-verdict serif fade ' + (success ? 'ok' : 'ng');
   sub.textContent = success
-    ? '全員の数字が正しく昇順に並びました'
-    : resultBreaks.length + '箇所、順番が崩れていました';
+    ? t('resultSubSuccess')
+    : t('resultSubFail', resultBreaks.length);
 
   document.getElementById('shareResultBtn').style.display = 'block';
 
@@ -1988,7 +2111,7 @@ function truncateForCanvas(ctx, text, maxWidth) {
 async function shareResult() {
   const btn = document.getElementById('shareResultBtn');
   const originalText = btn.textContent;
-  btn.textContent = '画像を作成中…';
+  btn.textContent = t('shareCreating');
   btn.disabled = true;
 
   try {
@@ -2049,12 +2172,12 @@ function replayAll() {
     // 動かないことがあるため使わず、ボタン自体を「本当に消えますよ」の
     // 警告表示に一時的に切り替えて、もう一度タップされたら実行する。
     replayAllArmed = true;
-    btn.textContent = '⚠️ もう一度タップで全部消えます';
+    btn.textContent = t('replayArmed');
     btn.classList.add('armed');
     clearTimeout(replayAllResetTimer);
     replayAllResetTimer = setTimeout(() => {
       replayAllArmed = false;
-      btn.textContent = '最初からやり直す';
+      btn.textContent = STATIC_I18N.replayAllBtn[currentLang] || STATIC_I18N.replayAllBtn.ja;
       btn.classList.remove('armed');
     }, 4000);
     return;
@@ -2062,7 +2185,7 @@ function replayAll() {
 
   clearTimeout(replayAllResetTimer);
   replayAllArmed = false;
-  btn.textContent = '最初からやり直す';
+  btn.textContent = STATIC_I18N.replayAllBtn[currentLang] || STATIC_I18N.replayAllBtn.ja;
   btn.classList.remove('armed');
 
   players = [];
@@ -2103,6 +2226,10 @@ document.getElementById('replayAllBtn').addEventListener('click', replayAll);
 document.getElementById('shareResultBtn').addEventListener('click', shareResult);
 document.getElementById('shareModalClose').addEventListener('click', closeShareModal);
 
+document.getElementById('langToggle').addEventListener('click', () => {
+  setLang(getLang() === 'ja' ? 'en' : 'ja');
+});
+
 // 主要な操作系ボタン全体に、共通の軽いタップ音を付ける
 // (それぞれ専用の音がある封筒・カード開封・並べ替えは対象外)
 document.querySelectorAll('.btn-primary, .dice-btn, .add-btn, .cat-tab').forEach(btn => {
@@ -2110,6 +2237,7 @@ document.querySelectorAll('.btn-primary, .dice-btn, .add-btn, .cat-tab').forEach
 });
 
 /* ---------------------------- 初期化 ---------------------------- */
+applyLanguage(getLang());
 loadCustomThemes();
 loadPlayers();
 renderPlayerList();
